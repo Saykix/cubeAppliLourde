@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="connexionPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1016.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Connexion">
+   <top>
+      <BorderPane prefHeight="225.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
+         <top>
+            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="#dbd5d6" layoutX="827.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEGOSUD" wrappingWidth="265.646484375">
+                     <font>
+                        <Font name="Arial Bold" size="50.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #940315;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="#dbd5d6" layoutX="842.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion" wrappingWidth="235.646484375">
+                     <font>
+                        <Font name="Arial Bold" size="45.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children>
+            </Pane>
+         </center>
+         <bottom>
+            <Pane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </top>
+   <center>
+      <Pane prefHeight="203.0" prefWidth="400.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="emailField" layoutX="980.0" layoutY="210.0" prefHeight="45.0" prefWidth="450.0" promptText="exemple@gmail.com">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <TextField fx:id="mdpField" layoutX="980.0" layoutY="407.0" prefHeight="45.0" prefWidth="450.0" promptText="************">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <Text fill="#dbd5d6" layoutX="443.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe:" wrappingWidth="268.646484375">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text fill="#dbd5d6" layoutX="443.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse email:" wrappingWidth="284.646484375">
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Text>
+            <Button fx:id="connexion" layoutX="1645.0" layoutY="696.0" mnemonicParsing="false" onMouseClicked="#connect" prefHeight="70.0" prefWidth="220.0" text="Connexion">
+               <font>
+                  <Font size="30.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
