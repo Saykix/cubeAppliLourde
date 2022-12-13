@@ -53,7 +53,13 @@ public class Accueil {
 
     @FXML
     void goClient(MouseEvent event) {
-
+    	try {
+            fxml = FXMLLoader.load(getClass().getResource("/interfaces/Utilisateur.fxml"));
+            accueilPane.getChildren().removeAll();
+            accueilPane.getChildren().setAll(fxml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
     }
 
     @FXML

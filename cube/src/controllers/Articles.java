@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,22 +12,30 @@ import Class.article;
 import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Articles implements Initializable{
-
+	private Parent fxml;
+	
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
 		
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cnx = ConnexionBdd.connexionDB();
@@ -43,6 +52,32 @@ public class Articles implements Initializable{
 		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<article,Integer>("coutStockage"));
 		
 		tableArticles.setItems(getDataArticle());
+			// open crud popup
+		tableArticles.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			
+            @Override
+            public void handle(MouseEvent event) {
+            	//open only on double click
+            	if(event.getClickCount() == 2) {            		
+            		FXMLLoader Loader = new FXMLLoader();
+            		Loader.setLocation(getClass().getResource("/interfaces/CrudVin.fxml"));
+            		try {
+            			Loader.load();
+            		} catch (IOException ex) {
+            			ex.printStackTrace();
+            		}
+            		
+            		CrudArticle CrudArticle = Loader.getController();
+            		
+            		CrudArticle.setData(tableArticles.getSelectionModel().getSelectedItem().getId(), tableArticles.getSelectionModel().getSelectedItem().getReference(), tableArticles.getSelectionModel().getSelectedItem().getNom());
+            		Parent p = Loader.getRoot();
+            		Stage stage = new Stage();
+            		stage.setScene(new Scene(p));
+            		stage.show();
+            	}
+            	}
+                    
+        });
 		
 	}
 	
@@ -64,7 +99,25 @@ public class Articles implements Initializable{
 	}
 	
     @FXML
-    private Text Famille;
+    void goFournisseur(MouseEvent event) {
+    	try {
+            fxml = FXMLLoader.load(getClass().getResource("/interfaces/Fournisseur.fxml"));
+            articlesPane.getChildren().removeAll();
+            articlesPane.getChildren().setAll(fxml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    
+    @FXML
+    private MenuButton Famille;
+
+    @FXML
+    private MenuItem FamilleBlanc;
+
+    @FXML
+    private MenuItem FamilleRouge;
 
     @FXML
     private Text Fournisseur;

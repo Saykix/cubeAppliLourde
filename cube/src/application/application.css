@@ -9,3 +9,11 @@
 	-fx-text-fill: #DBD5D6;
 	-fx-background-color: black;
 }
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: #1F1F1F;
+}
