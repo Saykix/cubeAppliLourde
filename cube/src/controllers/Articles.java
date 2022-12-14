@@ -69,7 +69,19 @@ public class Articles implements Initializable{
             		
             		CrudArticle CrudArticle = Loader.getController();
             		
-            		CrudArticle.setData(tableArticles.getSelectionModel().getSelectedItem().getId(), tableArticles.getSelectionModel().getSelectedItem().getReference(), tableArticles.getSelectionModel().getSelectedItem().getNom());
+            		CrudArticle.setData(tableArticles.getSelectionModel().getSelectedItem().getId(),
+            					tableArticles.getSelectionModel().getSelectedItem().getNom(),
+            					tableArticles.getSelectionModel().getSelectedItem().getReference(),
+            					tableArticles.getSelectionModel().getSelectedItem().getAnnee(),
+            					tableArticles.getSelectionModel().getSelectedItem().getFamille(),
+            					tableArticles.getSelectionModel().getSelectedItem().getPrixUnitaire(),
+            					tableArticles.getSelectionModel().getSelectedItem().getPrixCarton(),
+            					tableArticles.getSelectionModel().getSelectedItem().getPrixFournisseur(),
+            					tableArticles.getSelectionModel().getSelectedItem().getCoutStockage(),
+            					tableArticles.getSelectionModel().getSelectedItem().getTva(),
+            					tableArticles.getSelectionModel().getSelectedItem().getDomaine(),
+            					tableArticles.getSelectionModel().getSelectedItem().getDescription()
+            				);
             		Parent p = Loader.getRoot();
             		Stage stage = new Stage();
             		stage.setScene(new Scene(p));

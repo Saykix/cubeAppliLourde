@@ -12,10 +12,12 @@ import Class.fournisseur;
 import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Fournisseur implements Initializable {
 
@@ -56,6 +59,43 @@ public class Fournisseur implements Initializable {
 		tableFournisseurCodePostal.setCellValueFactory(new PropertyValueFactory<fournisseur,Integer>("codePostalFournisseur"));
 		
 		tableFournisseur.setItems(getDataArticle());
+		
+		// open crud popup
+		tableFournisseur.setOnMouseClicked(new EventHandler<MouseEvent>(){
+		
+        @Override
+        public void handle(MouseEvent event) {
+        	//open only on double click
+        	if(event.getClickCount() == 2) {            		
+        		FXMLLoader Loader = new FXMLLoader();
+        		Loader.setLocation(getClass().getResource("/interfaces/CrudFournisseur.fxml"));
+        		try {
+        			Loader.load();
+        		} catch (IOException ex) {
+        			ex.printStackTrace();
+        		}
+        		
+        		CrudFournisseur CrudFournisseur = Loader.getController();
+        		
+        		CrudFournisseur.setData(tableFournisseur.getSelectionModel().getSelectedItem().getIdFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getNomFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getSiretFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getEmailFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getAdresseFournisseur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur()
+        				);
+        		Parent p = Loader.getRoot();
+        		Stage stage = new Stage();
+        		stage.setScene(new Scene(p));
+        		stage.show();
+        	}
+        	}
+                
+    });
 		
 	}
 	
