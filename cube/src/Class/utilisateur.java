@@ -80,10 +80,10 @@ public class utilisateur {
 		public void setCodePostaleUtilisateur(int codePostaleUtilisateur) {
 			this.codePostaleUtilisateur = codePostaleUtilisateur;
 		}
-		public int administrateur() {
+		public int getAdministrateur() {
 			return administrateur;
 		}
-		public void administrateur(int administrateur) {
+		public void setAdministrateur(int administrateur) {
 			this.administrateur = administrateur;
 		}
 		

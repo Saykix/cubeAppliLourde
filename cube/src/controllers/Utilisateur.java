@@ -13,10 +13,12 @@ import Class.utilisateur;
 import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Utilisateur implements Initializable{
 
@@ -58,6 +61,43 @@ public class Utilisateur implements Initializable{
 		tableUtilisateurTelephone.setCellValueFactory(new PropertyValueFactory<utilisateur,Integer>("telephoneUtilisateur"));
 		
 		tableUtilisateur.setItems(getDataArticle());
+		
+		// open crud popup
+		tableUtilisateur.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				
+		        @Override
+		        public void handle(MouseEvent event) {
+		        	//open only on double click
+		        	if(event.getClickCount() == 2) {            		
+		        		FXMLLoader Loader = new FXMLLoader();
+		        		Loader.setLocation(getClass().getResource("/interfaces/CrudUtilisateur.fxml"));
+		        		try {
+		        			Loader.load();
+		        		} catch (IOException ex) {
+		        			ex.printStackTrace();
+		        		}
+		        		
+		        		CrudUtilisateur CrudUtilisateur = Loader.getController();
+		        		
+		        		CrudUtilisateur.setData(tableUtilisateur.getSelectionModel().getSelectedItem().getVilleUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getNomUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getPrenomUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getEmailUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getMotDePasseUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getAdresseUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getIdUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getCodePostaleUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getTelephoneUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getAdministrateur()
+		        				);
+		        		Parent p = Loader.getRoot();
+		        		Stage stage = new Stage();
+		        		stage.setScene(new Scene(p));
+		        		stage.show();
+		        	}
+		        	}
+		                
+		    });
 		
 	}
 	
