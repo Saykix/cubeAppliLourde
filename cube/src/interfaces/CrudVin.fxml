@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="crudArticlesPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="1526.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CrudArticle">
+   <center>
+      <Pane prefHeight="985.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableArticles" layoutX="1.0" prefHeight="50.0" prefWidth="1526.0" stylesheets="@../application/application.css">
+               <columns>
+                  <TableColumn fx:id="tableArticlesNom" prefWidth="75.0" text="Nom" />
+                  <TableColumn fx:id="tableArticlesReference" prefWidth="130.0" text="Référence" />
+                  <TableColumn fx:id="tableArticlesAnnee" prefWidth="89.0" text="Année" />
+                  <TableColumn fx:id="tableArticlesFamille" prefWidth="111.0" text="Famille" />
+                  <TableColumn fx:id="tableArticlesPrixUnitaire" prefWidth="117.0" text="Prix unitaire" />
+                  <TableColumn fx:id="tableArticlesPrixCarton" prefWidth="136.0" text="Prix carton" />
+                  <TableColumn fx:id="tableArticlesFournisseur" prefWidth="139.0" text="prix fournisseur" />
+                  <TableColumn fx:id="tableArticlesTVA" minWidth="0.0" prefWidth="0.0" text="TVA" />
+                  <TableColumn fx:id="tableArticlesCoutStockage" minWidth="0.0" prefWidth="1.0" text="Cout stockage" />
+                  <TableColumn fx:id="tableArticlesDomaine" minWidth="0.0" prefWidth="398.0" text="Domaine" />
+                  <TableColumn fx:id="tableArticlesDescription" prefWidth="321.0" text="Description" />
+               </columns>
+            </TableView>
+            <Button fx:id="delvin" layoutX="84.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#delvin" prefHeight="46.0" prefWidth="181.0" text="Supprimer le vin">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="CommandVin" layoutX="606.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#CommandVin" text="Commander le même vin">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="ModifierVin" layoutX="1265.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#ModifierVin" text="Modifier le vin">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

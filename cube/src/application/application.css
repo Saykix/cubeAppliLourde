@@ -1,1 +1,19 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.table-view {
+    -fx-background-color: transparent;
+	-fx-text-fill: blue
+	
+
+}
+
+.table-view .column-header .label{
+	-fx-text-fill: #DBD5D6;
+	-fx-background-color: black;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: #1F1F1F;
+}

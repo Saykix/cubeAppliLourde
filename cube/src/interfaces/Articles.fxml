@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -37,7 +39,7 @@
          <bottom>
             <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fx:id="Famille" fill="#dbd5d6" layoutX="238.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famille" wrappingWidth="157.646484375">
+                  <Text fx:id="Fournisseur" fill="#dbd5d6" layoutX="1451.0" layoutY="55.0" onMouseClicked="#goFournisseur" strokeType="OUTSIDE" strokeWidth="0.0" text="Fournisseur" wrappingWidth="266.646484375">
                      <font>
                         <Font name="Arial Bold" size="45.0" />
                      </font>
@@ -45,14 +47,18 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Text>
-                  <Text fx:id="Fournisseur" fill="#dbd5d6" layoutX="1451.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fournisseur" wrappingWidth="266.646484375">
+                  <MenuButton fx:id="Famille" layoutX="240.0" layoutY="-3.0" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-color: transparent;" stylesheets="@../application/application.css" text="Famille" textFill="#dbd5d6">
+                    <items>
+                      <MenuItem fx:id="FamilleRouge" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Rouge" />
+                      <MenuItem fx:id="FamilleBlanc" mnemonicParsing="false" text="Blanc" />
+                    </items>
                      <font>
                         <Font name="Arial Bold" size="45.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Text>
+                  </MenuButton>
                </children>
             </Pane>
          </bottom>
@@ -61,19 +67,19 @@
    <center>
       <Pane prefHeight="695.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tableArticles" prefHeight="792.0" prefWidth="1920.0">
+            <TableView fx:id="tableArticles" layoutX="-5.0" prefHeight="792.0" prefWidth="1926.0" stylesheets="@../application/application.css">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Nom" />
-                  <TableColumn prefWidth="130.0" text="Référence" />
-                  <TableColumn prefWidth="68.0" text="Année" />
-                  <TableColumn prefWidth="86.0" text="Famille" />
-                  <TableColumn prefWidth="95.0" text="Prix unitaire" />
-                  <TableColumn prefWidth="100.0" text="Prix carton" />
-                  <TableColumn prefWidth="100.0" text="prix fournisseur" />
-                  <TableColumn prefWidth="51.0" text="TVA" />
-                  <TableColumn prefWidth="99.0" text="Cout stockage" />
-                  <TableColumn prefWidth="96.0" text="Domaine" />
-                  <TableColumn prefWidth="435.0" text="Description" />
+                  <TableColumn fx:id="tableArticlesNom" prefWidth="75.0" text="Nom" />
+                  <TableColumn fx:id="tableArticlesReference" prefWidth="130.0" text="Référence" />
+                  <TableColumn fx:id="tableArticlesAnnee" prefWidth="89.0" text="Année" />
+                  <TableColumn fx:id="tableArticlesFamille" prefWidth="111.0" text="Famille" />
+                  <TableColumn fx:id="tableArticlesPrixUnitaire" prefWidth="117.0" text="Prix unitaire" />
+                  <TableColumn fx:id="tableArticlesPrixCarton" prefWidth="136.0" text="Prix carton" />
+                  <TableColumn fx:id="tableArticlesFournisseur" prefWidth="139.0" text="prix fournisseur" />
+                  <TableColumn fx:id="tableArticlesTVA" prefWidth="99.0" text="TVA" />
+                  <TableColumn fx:id="tableArticlesCoutStockage" prefWidth="144.0" text="Cout stockage" />
+                  <TableColumn fx:id="tableArticlesDomaine" prefWidth="296.0" text="Domaine" />
+                  <TableColumn fx:id="tableArticlesDescription" prefWidth="583.0" text="Description" />
                </columns>
             </TableView>
          </children>
