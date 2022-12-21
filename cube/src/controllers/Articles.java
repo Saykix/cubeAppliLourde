@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -121,6 +122,19 @@ public class Articles implements Initializable{
         } 
     }
     
+    @FXML
+    void goBack(MouseEvent event) {
+    	try {
+            fxml = FXMLLoader.load(getClass().getResource("/interfaces/Accueil.fxml"));
+            articlesPane.getChildren().removeAll();
+            articlesPane.getChildren().setAll(fxml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    @FXML
+    private ImageView backArrow;
     
     @FXML
     private MenuButton Famille;

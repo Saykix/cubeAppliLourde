@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +11,19 @@ import Class.utilisateur;
 import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class CrudUtilisateur implements Initializable {
 	static Connection cnx;
@@ -25,12 +31,12 @@ public class CrudUtilisateur implements Initializable {
 	public ResultSet result;
 	int id;
 	ObservableList<utilisateur> list = FXCollections.observableArrayList();
-     public void setData(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String motDePasseUtilisateur,
+     public void setData(String nomUtilisateur, String prenomUtilisateur, String motDePasseUtilisateur, String emailUtilisateur,
     		 String adresseUtilisateur, String villeUtilisateur, int idUtilisateur,
     		 int codePostaleUtilisateur, int telephoneUtilisateur, int administrateur) {
+    	 System.out.println("Id : " + id + "  Nom : " + nomUtilisateur + "  email : " + emailUtilisateur+ "  mdp : " + motDePasseUtilisateur);
     	 this.id=idUtilisateur;
         list.add(new utilisateur(nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur, adresseUtilisateur, villeUtilisateur,  idUtilisateur, codePostaleUtilisateur, telephoneUtilisateur, administrateur));
-        System.out.println("Id : " + id + "  Nom : " + nomUtilisateur + "  Référence : " + emailUtilisateur);
 
     }
 
@@ -38,18 +44,18 @@ public class CrudUtilisateur implements Initializable {
     private BorderPane crudUtilisateurPane;
 
     @FXML
-    private Button delvin;
+    private Button supprimerUtilisateur;
+    
+    @FXML
+    private Button modifierUtilisateur;
+
+
+    @FXML
+    void modifierUtilisateur(MouseEvent event) {
+
+    }
     
 
-    @FXML
-    void CommandVin(MouseEvent event) {
-
-    }
-
-    @FXML
-    void ModifierVin(MouseEvent event) {
-
-    }
 
     @FXML
     void delvin(MouseEvent event) {
@@ -106,6 +112,45 @@ public class CrudUtilisateur implements Initializable {
 		tableUtilisateurTelephone.setCellValueFactory(new PropertyValueFactory<utilisateur,Integer>("telephoneUtilisateur"));
 		
 		tableUtilisateur.setItems(list);
+		
+		// open crud popup
+				tableUtilisateur.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				
+		        @Override
+		        public void handle(MouseEvent event) {
+		        	//open only on double click
+		        	if(event.getClickCount() == 2) {            		
+		        		FXMLLoader Loader = new FXMLLoader();
+		        		Loader.setLocation(getClass().getResource("/interfaces/NewUtilisateur.fxml"));
+		        		try {
+		        			Loader.load();
+		        		} catch (IOException ex) {
+		        			ex.printStackTrace();
+		        		}
+		        		
+		        		NewUtilisateur NewUtilisateur = Loader.getController();
+		        		
+		        		NewUtilisateur.setData(tableUtilisateur.getSelectionModel().getSelectedItem().getNomUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getPrenomUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getEmailUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getMotDePasseUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getAdresseUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getVilleUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getIdUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getCodePostaleUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getTelephoneUtilisateur(),
+		        				tableUtilisateur.getSelectionModel().getSelectedItem().getAdministrateur()
+		        				);
+		        		Parent p = Loader.getRoot();
+		        		Stage stage = new Stage();
+		        		stage.setScene(new Scene(p));
+		        		stage.show();
+		        	}
+		        	}
+		                
+		    });
+				
+			}
 	}
 
-}
+

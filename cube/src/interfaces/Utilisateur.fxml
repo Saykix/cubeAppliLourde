@@ -4,6 +4,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -31,22 +33,19 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
+                  <ImageView fx:id="backArrow" fitHeight="52.0" fitWidth="75.0" layoutX="86.0" layoutY="12.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" style="-: white;">
+                     <image>
+                        <Image url="@../img/arrow-left.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </Pane>
          </center>
          <bottom>
-            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER">
-               <children>
-                  <Text fx:id="Fournisseur" fill="#dbd5d6" layoutX="878.0" layoutY="54.0" onMouseClicked="#goAccueil" strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil" wrappingWidth="163.646484375">
-                     <font>
-                        <Font name="Arial Bold" size="45.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Text>
-               </children>
-            </Pane>
+            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </top>

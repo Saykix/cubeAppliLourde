@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -33,6 +35,14 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
+                  <ImageView fx:id="backArrow" fitHeight="52.0" fitWidth="75.0" layoutX="86.0" layoutY="12.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" style="-: white;">
+                     <image>
+                        <Image url="@../img/arrow-left.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </Pane>
          </center>

@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -45,6 +46,19 @@ public class Fournisseur implements Initializable {
             e.printStackTrace();
         } 
 	}
+	
+    @FXML
+    void goBack(MouseEvent event) {
+    	try {
+            fxml = FXMLLoader.load(getClass().getResource("/interfaces/Articles.fxml"));
+            fournisseurPane.getChildren().removeAll();
+            fournisseurPane.getChildren().setAll(fxml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -116,6 +130,9 @@ public class Fournisseur implements Initializable {
 		return list;
 	}
 	
+	@FXML
+    private ImageView backArrow;
+	    
     @FXML
     private Text accueil;
 
