@@ -117,9 +117,30 @@ public class Utilisateur implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return list;
 	}
 	
+    @FXML
+    void addUser(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/NewUtilisateur.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
+		
+    }
+	
+   
+    
     @FXML
     private ImageView backArrow;
     
@@ -159,6 +180,7 @@ public class Utilisateur implements Initializable{
     @FXML
     private TableColumn<utilisateur, String> tableUtilisateurVille;
 
-
+    @FXML
+    private Text ajouterUtilisateur;
 
 }

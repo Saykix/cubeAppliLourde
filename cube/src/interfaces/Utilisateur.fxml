@@ -45,7 +45,17 @@
             </Pane>
          </center>
          <bottom>
-            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="ajouterUtilisateur" fill="#dbd5d6" layoutX="1532.0" layoutY="51.0" onMouseClicked="#addUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter utilisateur" wrappingWidth="351.646484375">
+                     <font>
+                        <Font name="Arial Bold" size="40.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+               </children></Pane>
          </bottom>
       </BorderPane>
    </top>

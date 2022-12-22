@@ -42,7 +42,8 @@ public class NewUtilisateur implements Initializable {
 		 			this.adresseUtilisateur.setText(adresse);
 		 			this.villeUtilisateur.setText(ville);
 		 			this.codePostaleUtilisateur.setText(codePostale);
-		 			this.telephoneUtilisateur.setText(telephone);		 			
+		 			this.telephoneUtilisateur.setText(telephone);		
+		 			Ajouter.setText("Modifier");
 		 			
 	 }
 	 
@@ -50,8 +51,7 @@ public class NewUtilisateur implements Initializable {
 		int id,administrateur;
 	
 	
-	 
-
+	
     @FXML
     private Button Ajouter;
 
@@ -91,7 +91,7 @@ public class NewUtilisateur implements Initializable {
 	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
-				int rs = ps.executeUpdate();
+				 ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,24 +99,25 @@ public class NewUtilisateur implements Initializable {
     	}
     	else {
     		String requete = "UPDATE `utilisateur` SET `nomUtilisateur` = '"+nomUtilisateur.getText()+"', `prenomUtilisateur` = '"+prenomUtilisateur.getText()+"',"
-    				+ " `emailUtilisateur` = '"+emailUtilisateur.getText()+"', `motDePasseUtilisateur` = '"+mdpUtilisateur.getText()+"', `adresseUtilisateur` = '"+adresseUtilisateur.getText()+"', `villeUtilisateur` = '"+villeUtilisateur.getText()+"' WHERE `utilisateur`.`IdUtilisateur` = 6;";
+    				+ " `emailUtilisateur` = '"+emailUtilisateur.getText()+"', `motDePasseUtilisateur` = '"+mdpUtilisateur.getText()+"', `adresseUtilisateur` = '"+adresseUtilisateur.getText()+"', `villeUtilisateur` = '"+villeUtilisateur.getText()+"' WHERE `utilisateur`.`IdUtilisateur` = "+id+"";
 	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
-				int rs = ps.executeUpdate();
+				 ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
+    	
+    	
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		cnx = ConnexionBdd.connexionDB();
-
-		}
 	}
+}
 
 
