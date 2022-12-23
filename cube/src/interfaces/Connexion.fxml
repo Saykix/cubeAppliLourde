@@ -30,7 +30,7 @@
                         <Font name="Arial Bold" size="45.0" />
                      </font>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Text>
                </children>

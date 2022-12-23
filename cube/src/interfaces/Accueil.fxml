@@ -45,14 +45,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Text>
-                  <Text fx:id="commanderVin" fill="#dbd5d6" layoutX="745.0" layoutY="55.0" onMouseClicked="#goVin" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander du vin" wrappingWidth="411.646484375">
-                     <font>
-                        <Font name="Arial Bold" size="45.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Text>
                   <Text fx:id="gererClient" fill="#dbd5d6" layoutX="1451.0" layoutY="55.0" onMouseClicked="#goClient" strokeType="OUTSIDE" strokeWidth="0.0" text="Gérer les clients" wrappingWidth="355.646484375">
                      <font>
                         <Font name="Arial Bold" size="45.0" />

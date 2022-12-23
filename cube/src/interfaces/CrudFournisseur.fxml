@@ -11,12 +11,12 @@
    <center>
       <Pane prefHeight="985.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="delvin" layoutX="84.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#delvin" prefHeight="46.0" prefWidth="181.0" text="Supprimer le vin">
+            <Button fx:id="delFournisseur" layoutX="84.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#delFournisseur" prefHeight="46.0" prefWidth="254.0" text="Supprimer le fournisseur">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="ModifierVin" layoutX="1265.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#ModifierVin" text="Modifier le vin">
+            <Button fx:id="ModifierUtilisateur" layoutX="1265.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#ModifierFournisseur" text="Modifier le fournisseur">
                <font>
                   <Font size="20.0" />
                </font>

@@ -51,12 +51,36 @@ public class CrudFournisseur implements Initializable {
     
 
     @FXML
-    void CommandVin(MouseEvent event) {
-
+    void ModifierFournisseur(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/NewFournisseur.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		NewFournisseur newFournisseur = Loader.getController();
+		
+		newFournisseur.setData(tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getNomFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getSiretFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getEmailFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getAdresseFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getIdFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur()
+				);
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
     }
 
     @FXML
-    void ModifierVin(MouseEvent event) {
+    void delFournisseur(MouseEvent event) {
 
     }
 
@@ -181,6 +205,18 @@ public class CrudFournisseur implements Initializable {
 		tableFournisseur.setItems(list);
 		
 		tableArticles.setItems(getDataArticle());
+		
+		tableFournisseur.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+			@Override
+			public void handle(MouseEvent event) {
+				if(event.getClickCount() == 2) {
+					
+				}
+				
+			}
+			
+		});
 		
 		tableArticles.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			

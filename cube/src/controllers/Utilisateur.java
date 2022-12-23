@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -37,8 +38,9 @@ public class Utilisateur implements Initializable{
 	public PreparedStatement st;
 	public ResultSet result;
 	
-	@FXML
-	void goAccueil(MouseEvent event) {
+	
+    @FXML
+    void goBack(MouseEvent event) {
     	try {
             fxml = FXMLLoader.load(getClass().getResource("/interfaces/Accueil.fxml"));
             UtilisateurPane.getChildren().removeAll();
@@ -46,7 +48,8 @@ public class Utilisateur implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         } 
-	}
+    }
+    
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -78,7 +81,6 @@ public class Utilisateur implements Initializable{
 		        		}
 		        		
 		        		CrudUtilisateur CrudUtilisateur = Loader.getController();
-		        		
 		        		CrudUtilisateur.setData(tableUtilisateur.getSelectionModel().getSelectedItem().getVilleUtilisateur(),
 		        				tableUtilisateur.getSelectionModel().getSelectedItem().getNomUtilisateur(),
 		        				tableUtilisateur.getSelectionModel().getSelectedItem().getPrenomUtilisateur(),
@@ -115,9 +117,33 @@ public class Utilisateur implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return list;
 	}
 	
+    @FXML
+    void addUser(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/NewUtilisateur.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
+		
+    }
+	
+   
+    
+    @FXML
+    private ImageView backArrow;
+    
     @FXML
     private Text Fournisseur;
 
@@ -154,6 +180,7 @@ public class Utilisateur implements Initializable{
     @FXML
     private TableColumn<utilisateur, String> tableUtilisateurVille;
 
-
+    @FXML
+    private Text ajouterUtilisateur;
 
 }
