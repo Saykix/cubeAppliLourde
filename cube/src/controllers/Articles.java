@@ -12,6 +12,7 @@ import Class.article;
 import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,7 @@ import javafx.stage.Stage;
 
 public class Articles implements Initializable{
 	private Parent fxml;
-	
+
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
@@ -52,7 +53,7 @@ public class Articles implements Initializable{
 		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<article,Integer>("tva"));
 		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<article,Integer>("coutStockage"));
 		
-		tableArticles.setItems(getDataArticle());
+		tableArticles.setItems(getDataArticle("None"));
 			// open crud popup
 		tableArticles.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			
@@ -94,20 +95,22 @@ public class Articles implements Initializable{
 		
 	}
 	
-	public static ObservableList<article> getDataArticle(){
+	public static ObservableList<article> getDataArticle(String famille){
 		ObservableList<article> list = FXCollections.observableArrayList();
-		
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from article");
+			PreparedStatement ps;
+			
+			ps = cnx.prepareStatement("select * from article");				
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
+
 				list.add(new article(Integer.parseInt(rs.getString("IdArticle")), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),Integer.parseInt(rs.getString("prixUnitaireArticle")), Integer.parseInt(rs.getString("prixCartonArticle")), Integer.parseInt(rs.getString("prixFournisseurArticle")), Integer.parseInt(rs.getString("coutStockageArticle")), Integer.parseInt(rs.getString("tvaArticle")), rs.getString("domaineArticle"),rs.getString("descriptionArticle")));
-			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(list);
 		return list;
 	}
 	
@@ -134,13 +137,75 @@ public class Articles implements Initializable{
     }
     
     @FXML
+    void ajouterVin(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/AjouterVin.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
+    }
+    
+    @FXML
+    void sortBlanc(ActionEvent event) {
+    	getDataArticle("Blanc");
+    }
+
+    @FXML
+    void sortDigestif(ActionEvent event) {
+    	getDataArticle("Digestif");
+    }
+
+    @FXML
+    void sortNone(ActionEvent event) {
+    	getDataArticle("None");
+    }
+
+    @FXML
+    void sortPetillant(ActionEvent event) {
+    	getDataArticle("Petillant");
+    }
+
+    @FXML
+    void sortRose(ActionEvent event) {
+    	getDataArticle("Rose");
+    }
+
+    @FXML
+    void sortRouge(ActionEvent event) {
+    	getDataArticle("Rouge");
+    }
+    
+    @FXML
     private ImageView backArrow;
+    
+    @FXML
+    private Text ajouterVin;
     
     @FXML
     private MenuButton Famille;
 
     @FXML
     private MenuItem FamilleBlanc;
+
+    @FXML
+    private MenuItem FamilleDigestif;
+
+    @FXML
+    private MenuItem FamilleNone;
+
+    @FXML
+    private MenuItem FamillePetillant;
+
+    @FXML
+    private MenuItem FamilleRose;
 
     @FXML
     private MenuItem FamilleRouge;
@@ -190,6 +255,8 @@ public class Articles implements Initializable{
     @FXML
     private TableColumn<article, Integer> tableArticlesTVA;
 
- 
+    @FXML
+    private TableColumn<article, String> stocckArticle;
 
+    
 }

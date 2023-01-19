@@ -1,9 +1,11 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Class.article;
@@ -11,13 +13,17 @@ import application.ConnexionBdd;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class CrudArticle implements Initializable {
 	static Connection cnx;
@@ -47,24 +53,49 @@ public class CrudArticle implements Initializable {
 
     @FXML
     void CommandVin(MouseEvent event) {
-
+    	
     }
 
     @FXML
     void ModifierVin(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/ModifierVin.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		ModifierVin modifierVin = Loader.getController();
+		
+		modifierVin.setData(tableArticles.getSelectionModel().getSelectedItem().getId(),
+				tableArticles.getSelectionModel().getSelectedItem().getNom(),
+				tableArticles.getSelectionModel().getSelectedItem().getReference(),
+				tableArticles.getSelectionModel().getSelectedItem().getAnnee(),
+				tableArticles.getSelectionModel().getSelectedItem().getFamille(),
+				tableArticles.getSelectionModel().getSelectedItem().getPrixUnitaire(),
+				tableArticles.getSelectionModel().getSelectedItem().getPrixCarton(),
+				tableArticles.getSelectionModel().getSelectedItem().getPrixFournisseur(),
+				tableArticles.getSelectionModel().getSelectedItem().getCoutStockage(),
+				tableArticles.getSelectionModel().getSelectedItem().getTva(),
+				tableArticles.getSelectionModel().getSelectedItem().getDomaine(),
+				tableArticles.getSelectionModel().getSelectedItem().getDescription()
+			);
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
 
     }
 
     @FXML
     void delvin(MouseEvent event) {
-    	System.out.println("delete from article where IdArticle = "+id);
-//		PreparedStatement ps;
-//		try {
-//			ps = cnx.prepareStatement("delete from article where IdArticle = "+id);
-//			ps.executeQuery();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `article` WHERE `article`.`IdArticle` = " + id + ";");
+			 ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     	tableArticles.getItems().removeAll(tableArticles.getSelectionModel().getSelectedItem());
     }
     

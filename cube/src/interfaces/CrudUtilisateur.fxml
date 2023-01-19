@@ -11,7 +11,7 @@
    <center>
       <Pane prefHeight="985.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="SupprimerUtilisateur" layoutX="84.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#delvin" prefHeight="46.0" prefWidth="244.0" text="Supprimer utilisateur">
+            <Button fx:id="SupprimerUtilisateur" layoutX="84.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#delUtilisateur" prefHeight="46.0" prefWidth="244.0" text="Supprimer utilisateur">
                <font>
                   <Font size="20.0" />
                </font></Button>

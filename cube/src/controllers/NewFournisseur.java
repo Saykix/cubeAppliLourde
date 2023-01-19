@@ -20,9 +20,8 @@ public class NewFournisseur implements Initializable {
 	public PreparedStatement st;
 	public ResultSet result;
 	
-	 public void setData(String nomFournisseur, String emailFournisseur, String siretFournisseur,
-				String adresseFournisseur, String coordonneesBancaireFournisseur, String villeFournisseur,
-				String descriptionFournisseur, int idFournisseur, int telephoneFournisseur, int codePostalFournisseur) {
+	 public void setData(int idFournisseur, String nomFournisseur, String siretFournisseur, String emailFournisseur, String coordonneesBancaireFournisseur, 
+			String adresseFournisseur, String villeFournisseur , String descriptionFournisseur,int codePostalFournisseur, int telephoneFournisseur) {
 			this.nom = nomFournisseur;
 			this.email = emailFournisseur;
 			this.siret = siretFournisseur;
@@ -85,13 +84,13 @@ public class NewFournisseur implements Initializable {
 	    private TextField villeFournisseur;
 
     @FXML
-    void ModifierUtilisateur(MouseEvent event) {
+    void AjouterFournisseur(MouseEvent event) {
     	if (nom == null) {
 	    	String requete = "INSERT INTO `fournisseur` (`nomFournisseur`, `emailFournisseur`, `telephoneFournisseur`, `siretFournisseur`,"
 	    			+ " `coordonneesBancaireFournisseur`, `adresseFournisseur`, `codePostalFournisseur`, `villeFournisseur`, `descriptionFournisseur`) VALUES"
-	    			+ " ('"+nomFournisseur.getText()+"', '"+emailFournisseur.getText()+"', '"+telephoneFournisseur.getText()+"', "+siretFournisseur.getText()+"', '"
+	    			+ " ('"+nomFournisseur.getText()+"', '"+emailFournisseur.getText()+"', '"+telephoneFournisseur.getText()+"', '"+siretFournisseur.getText()+"', '"
 	    			+coordonneesBancaireFournisseur.getText()+"', '"+adresseFournisseur.getText()+"', '"+codePostaleFournisseur.getText()+"', '"+villeFournisseur.getText()+"', '"
-	    			+descriptionFournisseur.getText()+" ');";
+	    			+descriptionFournisseur.getText()+"');";
 	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
@@ -102,7 +101,10 @@ public class NewFournisseur implements Initializable {
 			}
     	}
     	else {
-    		String requete = "";
+    		String requete = "UPDATE `fournisseur` SET `nomFournisseur` = '"+nomFournisseur.getText()+"', `emailFournisseur` = '"+emailFournisseur.getText()+"',"
+    				+ " `telephoneFournisseur` = '"+telephoneFournisseur.getText()+"', `siretFournisseur` = '"+siretFournisseur.getText()+"',"
+    				+ " `coordonneesBancaireFournisseur` = '"+coordonneesBancaireFournisseur.getText()+"', `adresseFournisseur` = '"+adresseFournisseur.getText()+"', `codePostalFournisseur` = '"+codePostaleFournisseur.getText()+"',"
+    				+ " `villeFournisseur` = '"+villeFournisseur.getText()+"', `descriptionFournisseur` = '"+descriptionFournisseur.getText()+"' WHERE `fournisseur`.`IdFournisseur` = "+id+";";
 	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);

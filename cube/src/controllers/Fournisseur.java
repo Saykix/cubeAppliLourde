@@ -93,14 +93,14 @@ public class Fournisseur implements Initializable {
         		
         		CrudFournisseur.setData(tableFournisseur.getSelectionModel().getSelectedItem().getIdFournisseur(),
         				tableFournisseur.getSelectionModel().getSelectedItem().getNomFournisseur(),
-        				tableFournisseur.getSelectionModel().getSelectedItem().getSiretFournisseur(),
         				tableFournisseur.getSelectionModel().getSelectedItem().getEmailFournisseur(),
-        				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getSiretFournisseur(),
         				tableFournisseur.getSelectionModel().getSelectedItem().getAdresseFournisseur(),
+        				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
     					tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
     					tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
-    					tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur(),
-    					tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur()
+    					tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur()
         				);
         		Parent p = Loader.getRoot();
         		Stage stage = new Stage();
@@ -129,6 +129,26 @@ public class Fournisseur implements Initializable {
 		}
 		return list;
 	}
+	
+	
+    @FXML
+    void addUser(MouseEvent event) {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("/interfaces/NewFournisseur.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.show();
+		
+    }
+	
 	
 	@FXML
     private ImageView backArrow;
@@ -168,6 +188,9 @@ public class Fournisseur implements Initializable {
 
     @FXML
     private TableColumn<fournisseur, String> tableFournisseurVille;
+    
+    @FXML
+    private Text ajouterFournisseur;
 
 
 }

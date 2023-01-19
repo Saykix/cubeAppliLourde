@@ -96,5 +96,4 @@ public class article {
 		this.coutStockage = coutStockage;
 	}
 	
-	
 }

@@ -47,9 +47,17 @@
          <bottom>
             <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #E36E66;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fx:id="accueil" fill="#dbd5d6" layoutX="878.0" layoutY="54.0" onMouseClicked="#goAccueil" strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil" wrappingWidth="164.646484375">
+                  <Text fx:id="accueil" fill="#dbd5d6" layoutX="43.0" layoutY="52.0" onMouseClicked="#goAccueil" strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil" wrappingWidth="164.646484375">
                      <font>
                         <Font name="Arial Bold" size="45.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
+                  <Text fx:id="ajouterFournisseur" fill="#dbd5d6" layoutX="1485.0" layoutY="50.0" onMouseClicked="#addUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter fournisseur" wrappingWidth="392.646484375">
+                     <font>
+                        <Font name="Arial Bold" size="40.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
