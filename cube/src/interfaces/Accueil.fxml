@@ -68,21 +68,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="tableInventaire" layoutX="584.0" layoutY="65.0" prefHeight="726.0" prefWidth="1336.0">
-              <columns>
-                <TableColumn fx:id="tableInventaireNom" prefWidth="75.0" text="Nom" />
-                <TableColumn fx:id="tableInventaireReference" prefWidth="130.0" text="Référence" />
-                  <TableColumn fx:id="tableInventaireAnnee" prefWidth="68.0" text="Année" />
-                  <TableColumn fx:id="tableInventaireFamille" prefWidth="86.0" text="Famille" />
-                  <TableColumn fx:id="tableInventairePrixUnitaire" prefWidth="95.0" text="Prix unitaire" />
-                  <TableColumn fx:id="tableInventairePrixCarton" prefWidth="100.0" text="Prix carton" />
-                  <TableColumn fx:id="tableInventairePrixFournisseur" prefWidth="100.0" text="prix fournisseur" />
-                  <TableColumn fx:id="tableInventaireTVA" prefWidth="51.0" text="TVA" />
-                  <TableColumn fx:id="tableInventaireCoutStockage" prefWidth="99.0" text="Cout stockage" />
-                  <TableColumn fx:id="tableInventaireDomaine" prefWidth="96.0" text="Domaine" />
-                  <TableColumn fx:id="tableInventaireDescription" prefWidth="435.0" text="Description" />
-              </columns>
-            </TableView>
             <Text fill="#dbd5d6" layoutX="1100.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des produits en stock" wrappingWidth="392.646484375">
                <font>
                   <Font name="Arial Bold" size="30.0" />
@@ -115,6 +100,21 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Text>
+            <TableView fx:id="tableArticles" layoutX="665.0" layoutY="56.0" prefHeight="735.0" prefWidth="1255.0" stylesheets="@../application/application.css">
+               <columns>
+                  <TableColumn fx:id="stockArticle" prefWidth="75.0" text="Stock" />
+                  <TableColumn fx:id="tableArticlesNom" prefWidth="59.0" text="Nom" />
+                  <TableColumn fx:id="tableArticlesDomaine" prefWidth="146.0" text="Domaine" />
+                  <TableColumn fx:id="tableArticlesReference" prefWidth="97.0" text="Référence" />
+                  <TableColumn fx:id="tableArticlesAnnee" prefWidth="73.0" text="Année" />
+                  <TableColumn fx:id="tableArticlesFamille" prefWidth="79.0" text="Famille" />
+                  <TableColumn fx:id="tableArticlesPrixUnitaire" prefWidth="112.0" text="Prix unitaire" />
+                  <TableColumn fx:id="tableArticlesPrixCarton" prefWidth="155.0" text="Prix carton" />
+                  <TableColumn fx:id="tableArticlesFournisseur" prefWidth="237.0" text="prix fournisseur" />
+                  <TableColumn fx:id="tableArticlesTVA" prefWidth="88.0" text="TVA" />
+                  <TableColumn fx:id="tableArticlesCoutStockage" prefWidth="133.0" text="Cout stockage" />
+               </columns>
+            </TableView>
          </children></Pane>
    </center>
 </BorderPane>

@@ -19,9 +19,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -35,7 +38,7 @@ public class CrudFournisseur implements Initializable {
 	ObservableList<fournisseur> list = FXCollections.observableArrayList();
      public void setData(int idFournisseur, String nomFournisseur, String emailFournisseur, String siretFournisseur, String adresseFournisseur, String coordonneesBancaireFournisseur, String villeFournisseur , String descriptionFournisseur, int telephoneFournisseur, int codePostalFournisseur) {
     	 this.idFournisseur=idFournisseur;
-        list.add(new fournisseur(descriptionFournisseur, nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, idFournisseur, telephoneFournisseur, codePostalFournisseur));
+        list.add(new fournisseur( nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, descriptionFournisseur,idFournisseur , telephoneFournisseur, codePostalFournisseur ));
         System.out.println("Id : " + idFournisseur + "  Nom : " + nomFournisseur + "  Référence : " + siretFournisseur);
 
     }
@@ -62,14 +65,14 @@ public class CrudFournisseur implements Initializable {
 		
 		NewFournisseur newFournisseur = Loader.getController();
 		
-		newFournisseur.setData(tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
+		newFournisseur.setData(tableFournisseur.getSelectionModel().getSelectedItem().getIdFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getNomFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getSiretFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getEmailFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getAdresseFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
-				tableFournisseur.getSelectionModel().getSelectedItem().getIdFournisseur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur()
 				);
@@ -79,22 +82,19 @@ public class CrudFournisseur implements Initializable {
 		stage.show();
     }
 
+
     @FXML
     void delFournisseur(MouseEvent event) {
-
-    }
-
-    @FXML
-    void delvin(MouseEvent event) {
-    	System.out.println("delete from article where IdArticle = "+idFournisseur);
-//		PreparedStatement ps;
-//		try {
-//			ps = cnx.prepareStatement("delete from article where IdArticle = "+idFournisseur);
-//			ps.executeQuery();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-    	tableFournisseur.getItems().removeAll(tableFournisseur.getSelectionModel().getSelectedItem());
+    	System.out.println("DELETE FROM `fournisseur` WHERE `fournisseur`.`IdFournisseur` = " + idFournisseur + ";");
+		try {
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `fournisseur` WHERE `fournisseur`.`IdFournisseur` = " + idFournisseur + ";");
+			 ps.executeUpdate();
+		} catch (SQLException e) {
+			Alert alert = new Alert(AlertType.ERROR,"Impossible de supprimer le fournisseur, il reste un article de ce fournisseur en stock", ButtonType.OK);
+			alert.showAndWait();
+			e.printStackTrace();
+		}
+		tableFournisseur.getItems().removeAll(tableFournisseur.getSelectionModel().getSelectedItem());
     }
     
     

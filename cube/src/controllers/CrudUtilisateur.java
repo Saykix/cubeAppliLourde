@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Class.utilisateur;
@@ -86,16 +87,14 @@ public class CrudUtilisateur implements Initializable {
 
 
     @FXML
-    void delvin(MouseEvent event) {
-    	System.out.println("delete from article where IdArticle = "+id);
-//		PreparedStatement ps;
-//		try {
-//			ps = cnx.prepareStatement("delete from article where IdArticle = "+id);
-//			ps.executeQuery();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-    	tableUtilisateur.getItems().removeAll(tableUtilisateur.getSelectionModel().getSelectedItem());
+    void delUtilisateur(MouseEvent event) {
+		try {
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `utilisateur` WHERE `utilisateur`.`IdUtilisateur` = " + id + ";");
+			 ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableUtilisateur.getItems().removeAll(tableUtilisateur.getSelectionModel().getSelectedItem());
     }
     
     

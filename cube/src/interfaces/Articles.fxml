@@ -59,8 +59,12 @@
                   </Text>
                   <MenuButton fx:id="Famille" layoutX="240.0" layoutY="-3.0" mnemonicParsing="false" popupSide="RIGHT" style="-fx-background-color: transparent;" stylesheets="@../application/application.css" text="Famille" textFill="#dbd5d6">
                     <items>
-                      <MenuItem fx:id="FamilleRouge" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Rouge" />
-                      <MenuItem fx:id="FamilleBlanc" mnemonicParsing="false" text="Blanc" />
+                        <MenuItem fx:id="FamilleNone" mnemonicParsing="false" onAction="#sortNone" text="None" />
+                      <MenuItem fx:id="FamilleBlanc" mnemonicParsing="false" onAction="#sortBlanc" text="Blanc" />
+                        <MenuItem fx:id="FamilleRouge" mnemonicParsing="false" onAction="#sortRouge" text="Rouge" />
+                        <MenuItem fx:id="FamilleRose" mnemonicParsing="false" onAction="#sortRose" text="Rosé" />
+                        <MenuItem fx:id="FamillePetillant" mnemonicParsing="false" onAction="#sortPetillant" text="Pétillant" />
+                        <MenuItem fx:id="FamilleDigestif" mnemonicParsing="false" onAction="#sortDigestif" text="Digestif" />
                     </items>
                      <font>
                         <Font name="Arial Bold" size="45.0" />
@@ -69,6 +73,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </MenuButton>
+                  <Text fx:id="ajouterVin" fill="#dbd5d6" layoutX="808.0" layoutY="54.0" onMouseClicked="#ajouterVin" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un vin" wrappingWidth="304.646484375">
+                     <font>
+                        <Font name="Arial Bold" size="45.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Text>
                </children>
             </Pane>
          </bottom>

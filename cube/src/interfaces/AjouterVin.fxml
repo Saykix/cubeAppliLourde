@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="AjouterVinPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="1526.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterVin">
+   <left>
+      <Pane prefHeight="985.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="modifierArticle" layoutX="1375.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#ajoutervin" text="Ajouter">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="nomArticle" layoutX="299.0" layoutY="50.0" />
+            <Text fill="#dbd5d6" layoutX="32.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Article:" wrappingWidth="170.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="anneeArticle" layoutX="811.0" layoutY="44.0" />
+            <Text fill="#dbd5d6" layoutX="552.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Année:" wrappingWidth="116.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tvaArticle" layoutX="299.0" layoutY="204.0" />
+            <Text fill="#dbd5d6" layoutX="33.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TVA Article:" wrappingWidth="173.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="familleArticle" layoutX="811.0" layoutY="200.0" />
+            <Text fill="#dbd5d6" layoutX="552.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famille Article:" wrappingWidth="215.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="prixCartonArticle" layoutX="1301.0" layoutY="123.0" />
+            <Text fill="#dbd5d6" layoutX="1045.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Carton:" wrappingWidth="165.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="domaineArticle" layoutX="811.0" layoutY="123.0" />
+            <Text fill="#dbd5d6" layoutX="553.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Domaine:" wrappingWidth="171.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="referenceArticle" layoutX="299.0" layoutY="120.0" />
+            <Text fill="#dbd5d6" layoutX="32.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reference Article:" wrappingWidth="249.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="prixUnitaireArticle" layoutX="1301.0" layoutY="50.0" />
+            <Text fill="#dbd5d6" layoutX="1040.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Unitaire:" wrappingWidth="175.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="prixFournisseurArticle" layoutX="1301.0" layoutY="206.0" />
+            <Text fill="#dbd5d6" layoutX="1040.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Fournisseur:" wrappingWidth="235.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="coutStockageArticle" layoutX="299.0" layoutY="291.0" />
+            <Text fill="#dbd5d6" layoutX="33.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cout Stockage:" wrappingWidth="207.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="descriptionArticle" layoutX="771.0" layoutY="290.0" prefHeight="135.0" prefWidth="196.0" />
+            <Text fill="#dbd5d6" layoutX="545.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" wrappingWidth="167.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="idFournisseurArticle" layoutX="1301.0" layoutY="291.0" />
+            <Text fill="#dbd5d6" layoutX="1040.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Fournisseur:" wrappingWidth="207.646484375">
+               <font>
+                  <Font name="Arial Bold" size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
