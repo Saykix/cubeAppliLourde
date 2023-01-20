@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import application.ConnectAPI;
 import application.ConnexionBdd;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,8 @@ public class Connexion implements Initializable{
 
     @FXML
     void connect(MouseEvent event) {
+    	ConnectAPI.connexionAPI();
+    	
     	String email = emailField.getText();
     	String mdp = mdpField.getText();
     	
