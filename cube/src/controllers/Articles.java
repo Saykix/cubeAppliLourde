@@ -41,6 +41,11 @@ public class Articles implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cnx = ConnexionBdd.connexionDB();
+		createTableau("None");
+		
+	}
+	
+	public void createTableau(String famille) {
 		tableArticlesNom.setCellValueFactory(new PropertyValueFactory<article,String>("nom"));
 		tableArticlesReference.setCellValueFactory(new PropertyValueFactory<article,String>("reference"));
 		tableArticlesAnnee.setCellValueFactory(new PropertyValueFactory<article,String>("annee"));
@@ -53,7 +58,7 @@ public class Articles implements Initializable{
 		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<article,Integer>("tva"));
 		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<article,Integer>("coutStockage"));
 		
-		tableArticles.setItems(getDataArticle("None"));
+		tableArticles.setItems(getDataArticle(famille));
 			// open crud popup
 		tableArticles.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			
@@ -92,15 +97,18 @@ public class Articles implements Initializable{
             	}
                     
         });
-		
 	}
 	
 	public static ObservableList<article> getDataArticle(String famille){
 		ObservableList<article> list = FXCollections.observableArrayList();
 		try {
 			PreparedStatement ps;
-			
-			ps = cnx.prepareStatement("select * from article");				
+			if(famille.equals("None")) {	
+				ps = cnx.prepareStatement("select * from article");	
+			}
+			else {				
+				ps = cnx.prepareStatement("select * from article where familleArticle = '" + famille + "';");		
+			}
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -112,6 +120,7 @@ public class Articles implements Initializable{
 		}
 		System.out.println(list);
 		return list;
+		
 	}
 	
     @FXML
@@ -155,32 +164,32 @@ public class Articles implements Initializable{
     
     @FXML
     void sortBlanc(ActionEvent event) {
-    	getDataArticle("Blanc");
+    	createTableau("Blanc");
     }
 
     @FXML
     void sortDigestif(ActionEvent event) {
-    	getDataArticle("Digestif");
+    	createTableau("Digestif");
     }
 
     @FXML
     void sortNone(ActionEvent event) {
-    	getDataArticle("None");
+    	createTableau("None");
     }
 
     @FXML
     void sortPetillant(ActionEvent event) {
-    	getDataArticle("Petillant");
+    	createTableau("Petillant");
     }
 
     @FXML
     void sortRose(ActionEvent event) {
-    	getDataArticle("Rose");
+    	createTableau("Rose");
     }
 
     @FXML
     void sortRouge(ActionEvent event) {
-    	getDataArticle("Rouge");
+    	createTableau("Rouge");
     }
     
     @FXML
