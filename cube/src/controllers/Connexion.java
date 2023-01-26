@@ -45,7 +45,8 @@ public class Connexion implements Initializable{
 
     @FXML
     void connect(MouseEvent event) {
-    	ConnectAPI.connexionAPI();
+    	ConnectAPI.sendGetRequest();
+    	ConnectAPI.sendPostRequest();
     	
     	String email = emailField.getText();
     	String mdp = mdpField.getText();
