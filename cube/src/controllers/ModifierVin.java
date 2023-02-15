@@ -22,9 +22,9 @@ public class ModifierVin implements Initializable {
 	public ResultSet result;
 	
 	String nom, reference,annee, famille, domaine, description, prixUnitaire,prixCarton,prixFournisseur,tva,coutStockage;
-	int id;
+	String id;
 	
-	public void setData(int id, String nom, String reference, String annee, String famille, int prixUnitaire, int prixCarton, int prixFournisseur, int coutStockage, int tva,
+	public void setData(String id, String nom, String reference, String annee, String famille, String prixUnitaire, String prixCarton, String prixFournisseur, String coutStockage, String tva,
 			String domaine, String description
 			) {
 		
@@ -35,11 +35,11 @@ public class ModifierVin implements Initializable {
 		this.domaine = domaine;
 		this.description = description;
 		this.id = id;
-		this.prixUnitaire = Integer.toString(prixUnitaire);
-		this.prixCarton = Integer.toString(prixCarton);
-		this.prixFournisseur = Integer.toString(prixFournisseur);
-		this.tva = Integer.toString(tva);
-		this.coutStockage = Integer.toString(coutStockage);
+		this.prixUnitaire = prixUnitaire;
+		this.prixCarton = prixCarton;
+		this.prixFournisseur = prixFournisseur;
+		this.tva = tva;
+		this.coutStockage = coutStockage;
 		
 		this.nomArticle.setText(nom);
 		this.referenceArticle.setText(reference);
@@ -95,10 +95,9 @@ public class ModifierVin implements Initializable {
 
     @FXML
     void modifiervin(MouseEvent event) {
-    	String requete = "UPDATE `article` SET `nomArticle` = '"+nomArticle.getText()+"', `anneeArticle` = '"+anneeArticle.getText()+"', `prixUnitaireArticle` = '"+prixUnitaireArticle.getText()+"', `prixCartonArticle` = '"+prixCartonArticle.getText()+"',"
+    	String requete = "UPDATE `tablearticle` SET `nomArticle` = '"+nomArticle.getText()+"', `anneeArticle` = '"+anneeArticle.getText()+"', `prixUnitaireArticle` = '"+prixUnitaireArticle.getText()+"', `prixCartonArticle` = '"+prixCartonArticle.getText()+"',"
     			+ " `prixFournisseurArticle` = '"+prixFournisseurArticle.getText()+"', `referenceArticle` = '"+referenceArticle.getText()+"', `tvaArticle` = '"+tvaArticle.getText()+"', `domaineArticle` = '"+domaineArticle.getText()+"', "
-    			+ "`descriptionArticle` = '"+descriptionArticle.getText()+"', `familleArticle` = '"+familleArticle.getText()+"', `coutStockageArticle` = '"+coutStockageArticle.getText()+"' WHERE `article`.`IdArticle` = "+id+";";
-    	System.out.println(requete);
+    			+ "`descriptionArticle` = '"+descriptionArticle.getText()+"', `familleArticle` = '"+familleArticle.getText()+"', `coutStockageArticle` = '"+coutStockageArticle.getText()+"' WHERE `tablearticle`.`IdArticle` = "+id+";";
     	try {
 			PreparedStatement ps = cnx.prepareStatement(requete);
 			 ps.executeUpdate();

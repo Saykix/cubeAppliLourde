@@ -29,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Fournisseur implements Initializable {
-
 	private Parent fxml;
 	
 	static Connection cnx;
@@ -69,8 +68,8 @@ public class Fournisseur implements Initializable {
 		tableFournisseurAdresse.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("adresseFournisseur"));
 		tableFournisseurVille.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("villeFournisseur"));
 		tableFournisseurDescription.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("descriptionFournisseur"));
-		tableFournisseurTelephone.setCellValueFactory(new PropertyValueFactory<fournisseur,Integer>("telephoneFournisseur"));
-		tableFournisseurCodePostal.setCellValueFactory(new PropertyValueFactory<fournisseur,Integer>("codePostalFournisseur"));
+		tableFournisseurTelephone.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("telephoneUtilisateur"));
+		tableFournisseurCodePostal.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("codePostaleUtilisateur"));
 		
 		tableFournisseur.setItems(getDataArticle());
 		
@@ -99,8 +98,8 @@ public class Fournisseur implements Initializable {
         				tableFournisseur.getSelectionModel().getSelectedItem().getCoordonneesBancaireFournisseur(),
     					tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
     					tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
-    					tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur(),
-    					tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur()
+    					tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneUtilisateur(),
+    					tableFournisseur.getSelectionModel().getSelectedItem().getCodePostaleUtilisateur()
         				);
         		Parent p = Loader.getRoot();
         		Stage stage = new Stage();
@@ -117,12 +116,11 @@ public class Fournisseur implements Initializable {
 		ObservableList<fournisseur> list = FXCollections.observableArrayList();
 		
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from fournisseur");
+			PreparedStatement ps = cnx.prepareStatement("select * from tablefournisseur");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				list.add(new fournisseur(rs.getString("nomFournisseur"),rs.getString("emailFournisseur"),rs.getString("siretFournisseur"),rs.getString("adresseFournisseur"),rs.getString("coordonneesBancaireFournisseur"),rs.getString("villeFournisseur"),rs.getString("descriptionFournisseur"),Integer.parseInt(rs.getString("idFournisseur")),Integer.parseInt(rs.getString("telephoneFournisseur")),Integer.parseInt(rs.getString("codePostalFournisseur"))));
-			
+				list.add(new fournisseur(rs.getString("nomFournisseur"),rs.getString("emailFournisseur"),rs.getString("siretFournisseur"),rs.getString("adresseFournisseur"),rs.getString("coordonneesBancarieFournisseur"),rs.getString("villeFournisseur"),rs.getString("descriptionFournisseur"),rs.getString("idFournisseur"),rs.getString("telephoneUtilisateur"),rs.getString("codePostaleUtilisateur")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -169,7 +167,7 @@ public class Fournisseur implements Initializable {
     private TableColumn<fournisseur, String> tableFournisseurAdresse;
 
     @FXML
-    private TableColumn<fournisseur, Integer> tableFournisseurCodePostal;
+    private TableColumn<fournisseur, String> tableFournisseurCodePostal;
 
     @FXML
     private TableColumn<fournisseur, String> tableFournisseurDescription;
@@ -184,7 +182,7 @@ public class Fournisseur implements Initializable {
     private TableColumn<fournisseur, String> tableFournisseurSiret;
 
     @FXML
-    private TableColumn<fournisseur, Integer> tableFournisseurTelephone;
+    private TableColumn<fournisseur, String> tableFournisseurTelephone;
 
     @FXML
     private TableColumn<fournisseur, String> tableFournisseurVille;

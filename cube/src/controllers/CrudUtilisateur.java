@@ -30,12 +30,11 @@ public class CrudUtilisateur implements Initializable {
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
-	int id;
+	String id;
 	ObservableList<utilisateur> list = FXCollections.observableArrayList();
      public void setData(String villeUtilisateur,String nomUtilisateur ,String prenomUtilisateur, String emailUtilisateur,
-    		  String motDePasseUtilisateur, String adresseUtilisateur, int idUtilisateur,
-    		 int codePostaleUtilisateur, int telephoneUtilisateur, int administrateur) {
-    	 System.out.println("Id : " + id + "  Nom : " + nomUtilisateur + "  email : " + emailUtilisateur+ "  mdp : " + motDePasseUtilisateur);
+    		  String motDePasseUtilisateur, String adresseUtilisateur, String idUtilisateur,
+    		  String codePostaleUtilisateur, String telephoneUtilisateur, String administrateur) {
     	 this.id=idUtilisateur;
         list.add(new utilisateur(nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur, adresseUtilisateur, villeUtilisateur,  idUtilisateur, codePostaleUtilisateur, telephoneUtilisateur, administrateur));
 
@@ -89,7 +88,7 @@ public class CrudUtilisateur implements Initializable {
     @FXML
     void delUtilisateur(MouseEvent event) {
 		try {
-			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `utilisateur` WHERE `utilisateur`.`IdUtilisateur` = " + id + ";");
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `tableutilisateur` WHERE `tableutilisateur`.`IdUtilisateur` = " + id + ";");
 			 ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

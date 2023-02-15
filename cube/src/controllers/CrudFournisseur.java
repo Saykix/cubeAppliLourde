@@ -34,11 +34,11 @@ public class CrudFournisseur implements Initializable {
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
-	int idFournisseur;
+	String idFournisseur;
 	ObservableList<fournisseur> list = FXCollections.observableArrayList();
-     public void setData(int idFournisseur, String nomFournisseur, String emailFournisseur, String siretFournisseur, String adresseFournisseur, String coordonneesBancaireFournisseur, String villeFournisseur , String descriptionFournisseur, int telephoneFournisseur, int codePostalFournisseur) {
+     public void setData(String idFournisseur, String nomFournisseur, String emailFournisseur, String siretFournisseur, String adresseFournisseur, String coordonneesBancaireFournisseur, String villeFournisseur , String descriptionFournisseur, String telephoneUtilisateur, String codePostaleUtilisateur) {
     	 this.idFournisseur=idFournisseur;
-        list.add(new fournisseur( nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, descriptionFournisseur,idFournisseur , telephoneFournisseur, codePostalFournisseur ));
+        list.add(new fournisseur( nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, descriptionFournisseur,idFournisseur , telephoneUtilisateur, codePostaleUtilisateur ));
         System.out.println("Id : " + idFournisseur + "  Nom : " + nomFournisseur + "  Référence : " + siretFournisseur);
 
     }
@@ -73,8 +73,8 @@ public class CrudFournisseur implements Initializable {
 				tableFournisseur.getSelectionModel().getSelectedItem().getAdresseFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getVilleFournisseur(),
 				tableFournisseur.getSelectionModel().getSelectedItem().getDescriptionFournisseur(),
-				tableFournisseur.getSelectionModel().getSelectedItem().getCodePostalFournisseur(),
-				tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneFournisseur()
+				tableFournisseur.getSelectionModel().getSelectedItem().getCodePostaleUtilisateur(),
+				tableFournisseur.getSelectionModel().getSelectedItem().getTelephoneUtilisateur()
 				);
 		Parent p = Loader.getRoot();
 		Stage stage = new Stage();
@@ -85,16 +85,15 @@ public class CrudFournisseur implements Initializable {
 
     @FXML
     void delFournisseur(MouseEvent event) {
-    	System.out.println("DELETE FROM `fournisseur` WHERE `fournisseur`.`IdFournisseur` = " + idFournisseur + ";");
 		try {
-			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `fournisseur` WHERE `fournisseur`.`IdFournisseur` = " + idFournisseur + ";");
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `tablefournisseur` WHERE `tablefournisseur`.`IdFournisseur` = " + idFournisseur + ";");
 			 ps.executeUpdate();
+			 tableFournisseur.getItems().removeAll(tableFournisseur.getSelectionModel().getSelectedItem());
 		} catch (SQLException e) {
 			Alert alert = new Alert(AlertType.ERROR,"Impossible de supprimer le fournisseur, il reste un article de ce fournisseur en stock", ButtonType.OK);
 			alert.showAndWait();
 			e.printStackTrace();
 		}
-		tableFournisseur.getItems().removeAll(tableFournisseur.getSelectionModel().getSelectedItem());
     }
     
     
@@ -105,7 +104,7 @@ public class CrudFournisseur implements Initializable {
     private TableColumn<fournisseur, String> tableFournisseurAdresse;
 
     @FXML
-    private TableColumn<fournisseur, Integer> tableFournisseurCodePostal;
+    private TableColumn<fournisseur, String> tableFournisseurCodePostal;
 
     @FXML
     private TableColumn<fournisseur, String> tableFournisseurDescription;
@@ -120,7 +119,7 @@ public class CrudFournisseur implements Initializable {
     private TableColumn<fournisseur, String> tableFournisseurSiret;
 
     @FXML
-    private TableColumn<fournisseur, Integer> tableFournisseurTelephone;
+    private TableColumn<fournisseur, String> tableFournisseurTelephone;
 
     @FXML
     private TableColumn<fournisseur, String> tableFournisseurVille;
@@ -132,7 +131,7 @@ public class CrudFournisseur implements Initializable {
     private TableColumn<article, String> tableArticlesAnnee;
 
     @FXML
-    private TableColumn<article, Integer> tableArticlesCoutStockage;
+    private TableColumn<article, String> tableArticlesCoutStockage;
 
     @FXML
     private TableColumn<article, String> tableArticlesDescription;
@@ -144,32 +143,32 @@ public class CrudFournisseur implements Initializable {
     private TableColumn<article, String> tableArticlesFamille;
 
     @FXML
-    private TableColumn<article, Integer> tableArticlesFournisseur;
+    private TableColumn<article, String> tableArticlesFournisseur;
 
     @FXML
     private TableColumn<article, String> tableArticlesNom;
 
     @FXML
-    private TableColumn<article, Integer> tableArticlesPrixCarton;
+    private TableColumn<article, String> tableArticlesPrixCarton;
 
     @FXML
-    private TableColumn<article, Integer> tableArticlesPrixUnitaire;
+    private TableColumn<article, String> tableArticlesPrixUnitaire;
 
     @FXML
     private TableColumn<article, String> tableArticlesReference;
 
     @FXML
-    private TableColumn<article, Integer> tableArticlesTVA;
+    private TableColumn<article, String> tableArticlesTVA;
 
 	public static ObservableList<article> getDataArticle(){
 		ObservableList<article> listArticle = FXCollections.observableArrayList();
 		
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from article");
+			PreparedStatement ps = cnx.prepareStatement("select * from tablearticle");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				listArticle.add(new article(Integer.parseInt(rs.getString("IdArticle")), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),Integer.parseInt(rs.getString("prixUnitaireArticle")), Integer.parseInt(rs.getString("prixCartonArticle")), Integer.parseInt(rs.getString("prixFournisseurArticle")), Integer.parseInt(rs.getString("coutStockageArticle")), Integer.parseInt(rs.getString("tvaArticle")), rs.getString("domaineArticle"),rs.getString("descriptionArticle")));
+				listArticle.add(new article(rs.getString("IdArticle"), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),rs.getString("prixUnitaireArticle"), rs.getString("prixCartonArticle"), rs.getString("prixFournisseurArticle"), rs.getString("coutStockageArticle"), rs.getString("tvaArticle"), rs.getString("domaineArticle"),rs.getString("descriptionArticle")));
 			
 			}
 		} catch (SQLException e) {
@@ -187,8 +186,8 @@ public class CrudFournisseur implements Initializable {
 		tableFournisseurAdresse.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("adresseFournisseur"));
 		tableFournisseurVille.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("villeFournisseur"));
 		tableFournisseurDescription.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("descriptionFournisseur"));
-		tableFournisseurTelephone.setCellValueFactory(new PropertyValueFactory<fournisseur,Integer>("telephoneFournisseur"));
-		tableFournisseurCodePostal.setCellValueFactory(new PropertyValueFactory<fournisseur,Integer>("codePostalFournisseur"));
+		tableFournisseurTelephone.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("telephoneUtilisateur"));
+		tableFournisseurCodePostal.setCellValueFactory(new PropertyValueFactory<fournisseur,String>("codePostaleUtilisateur"));
 		
 		tableArticlesNom.setCellValueFactory(new PropertyValueFactory<article,String>("nom"));
 		tableArticlesReference.setCellValueFactory(new PropertyValueFactory<article,String>("reference"));
@@ -196,11 +195,11 @@ public class CrudFournisseur implements Initializable {
 		tableArticlesFamille.setCellValueFactory(new PropertyValueFactory<article,String>("famille"));
 		tableArticlesDomaine.setCellValueFactory(new PropertyValueFactory<article,String>("domaine"));
 		tableArticlesDescription.setCellValueFactory(new PropertyValueFactory<article,String>("description"));
-		tableArticlesPrixUnitaire.setCellValueFactory(new PropertyValueFactory<article,Integer>("prixUnitaire"));
-		tableArticlesPrixCarton.setCellValueFactory(new PropertyValueFactory<article,Integer>("prixCarton"));
-		tableArticlesFournisseur.setCellValueFactory(new PropertyValueFactory<article,Integer>("prixFournisseur"));
-		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<article,Integer>("tva"));
-		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<article,Integer>("coutStockage"));
+		tableArticlesPrixUnitaire.setCellValueFactory(new PropertyValueFactory<article,String>("prixUnitaire"));
+		tableArticlesPrixCarton.setCellValueFactory(new PropertyValueFactory<article,String>("prixCarton"));
+		tableArticlesFournisseur.setCellValueFactory(new PropertyValueFactory<article,String>("prixFournisseur"));
+		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<article,String>("tva"));
+		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<article,String>("coutStockage"));
 		
 		tableFournisseur.setItems(list);
 		

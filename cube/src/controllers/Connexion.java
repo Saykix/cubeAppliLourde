@@ -8,17 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import application.ConnectAPI;
 import application.ConnexionBdd;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -45,19 +44,18 @@ public class Connexion implements Initializable{
 
     @FXML
     void connect(MouseEvent event) {
-    	ConnectAPI.connexionAPI();
+//    	ConnectAPI.sendGetRequest();
+//    	ConnectAPI.sendPostRequest();
     	
     	String email = emailField.getText();
     	String mdp = mdpField.getText();
     	
-    	String sql = "select emailUtilisateur, motDePasseUtilisateur, administrateur from utilisateur";
+    	String sql = "select emailUtilisateur, motDePasseUtilisateur, administrateur from tableutilisateur WHERE emailUtilisateur = '"+email+"' and administrateur= 1";
     	try {
 			st = cnx.prepareStatement(sql);
 			result = st.executeQuery();
-			if(result.next()) {		
-				System.out.println(result.getString("emailUtilisateur"));
-				System.out.println(result.getString("motDePasseUtilisateur"));
-				if(email.equals(result.getString("emailUtilisateur")) && mdp.equals(result.getString("motDePasseUtilisateur")) || 1==1) {
+			if(result.next() != false ) {		
+				if(email.equals(result.getString("emailUtilisateur")) && mdp.equals(result.getString("motDePasseUtilisateur"))) {
 					try {
 						fxml = FXMLLoader.load(getClass().getResource("/interfaces/Accueil.fxml"));
 						connexionPane.getChildren().removeAll();
@@ -69,6 +67,9 @@ public class Connexion implements Initializable{
 					Alert alert = new Alert(AlertType.ERROR,"L'email ou le mot de passe est incorrect", ButtonType.OK);
 					alert.showAndWait();
 				}
+			}else {
+				Alert alert = new Alert(AlertType.ERROR,"L'email ou le mot de passe est incorrect", ButtonType.OK);
+				alert.showAndWait();
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();

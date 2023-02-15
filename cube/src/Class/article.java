@@ -1,12 +1,11 @@
 package Class;
 
 public class article {
-	String nom, reference,annee, famille, domaine, description;
-	int id, prixUnitaire,prixCarton,prixFournisseur,tva,coutStockage;
+	String nom, reference,annee, famille, domaine, description, id, prixUnitaire,prixCarton,prixFournisseur,tva,coutStockage;
 	
 	
 	
-	public article(int id, String nom, String reference, String annee, String famille, int prixUnitaire, int prixCarton, int prixFournisseur, int coutStockage, int tva,
+	public article(String id, String nom, String reference, String annee, String famille, String prixUnitaire, String prixCarton, String prixFournisseur, String coutStockage, String tva,
 			String domaine, String description
 			) {
 		super();
@@ -59,40 +58,40 @@ public class article {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getPrixUnitaire() {
+	public String getPrixUnitaire() {
 		return prixUnitaire;
 	}
-	public void setPrixUnitaire(int prixUnitaire) {
+	public void setPrixUnitaire(String prixUnitaire) {
 		this.prixUnitaire = prixUnitaire;
 	}
-	public int getPrixCarton() {
+	public String getPrixCarton() {
 		return prixCarton;
 	}
-	public void setPrixCarton(int prixCarton) {
+	public void setPrixCarton(String prixCarton) {
 		this.prixCarton = prixCarton;
 	}
-	public int getPrixFournisseur() {
+	public String getPrixFournisseur() {
 		return prixFournisseur;
 	}
-	public void setPrixFournisseur(int prixFournisseur) {
+	public void setPrixFournisseur(String prixFournisseur) {
 		this.prixFournisseur = prixFournisseur;
 	}
-	public int getTva() {
+	public String getTva() {
 		return tva;
 	}
-	public void setTva(int tva) {
+	public void setTva(String tva) {
 		this.tva = tva;
 	}
-	public int getCoutStockage() {
+	public String getCoutStockage() {
 		return coutStockage;
 	}
-	public void setCoutStockage(int coutStockage) {
+	public void setCoutStockage(String coutStockage) {
 		this.coutStockage = coutStockage;
 	}
 	

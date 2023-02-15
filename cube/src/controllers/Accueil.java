@@ -63,7 +63,7 @@ public class Accueil implements Initializable{
     private TableColumn<articleStock, String> tableArticlesAnnee;
 
     @FXML
-    private TableColumn<articleStock, Integer> tableArticlesCoutStockage;
+    private TableColumn<articleStock, String> tableArticlesCoutStockage;
 
     @FXML
     private TableColumn<articleStock, String> tableArticlesDomaine;
@@ -72,25 +72,25 @@ public class Accueil implements Initializable{
     private TableColumn<articleStock, String> tableArticlesFamille;
 
     @FXML
-    private TableColumn<articleStock, Integer> tableArticlesFournisseur;
+    private TableColumn<articleStock, String> tableArticlesFournisseur;
 
     @FXML
     private TableColumn<articleStock, String> tableArticlesNom;
 
     @FXML
-    private TableColumn<articleStock, Integer> tableArticlesPrixCarton;
+    private TableColumn<articleStock, String> tableArticlesPrixCarton;
 
     @FXML
-    private TableColumn<articleStock, Integer> tableArticlesPrixUnitaire;
+    private TableColumn<articleStock, String> tableArticlesPrixUnitaire;
 
     @FXML
     private TableColumn<articleStock, String> tableArticlesReference;
 
     @FXML
-    private TableColumn<articleStock, Integer> tableArticlesTVA;
+    private TableColumn<articleStock, String> tableArticlesTVA;
 
     @FXML
-    private TableColumn<articleStock, Integer> stockArticle;
+    private TableColumn<articleStock, String> stockArticle;
     @FXML
     private Text totalProduit;
 
@@ -98,9 +98,9 @@ public class Accueil implements Initializable{
     void doInventaire(MouseEvent event) {
     	ObservableList<Integer> produit = FXCollections.observableArrayList();
     	ObservableList<Integer> coutProduit = FXCollections.observableArrayList();
-    	ObservableList<Integer> coutStockage = FXCollections.observableArrayList();
+    	ObservableList<Double> coutStockage = FXCollections.observableArrayList();
     	try {
-			PreparedStatement ps = cnx.prepareStatement("select IdArticle from article");
+			PreparedStatement ps = cnx.prepareStatement("select IdArticle from tablearticle");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				produit.add(Integer.parseInt(rs.getString("IdArticle")));
@@ -108,9 +108,9 @@ public class Accueil implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	totalProduit.setText(totalProduit.getText() + " \n" + produit.size());
+    	totalProduit.setText("Nombre total de produit" + " \n" + produit.size());
     	try {
-			PreparedStatement ps = cnx.prepareStatement("select prixUnitaireArticle from article");
+			PreparedStatement ps = cnx.prepareStatement("select prixUnitaireArticle from tablearticle");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				coutProduit.add(Integer.parseInt(rs.getString("prixUnitaireArticle")));
@@ -118,17 +118,17 @@ public class Accueil implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	float coutTotal = 0;
+    	double coutTotal = 0;
     	for(int i = 0; i < coutProduit.size(); i++) {
     		coutTotal += coutProduit.get(i);
     	}
-    	coutMarchandise.setText(coutMarchandise.getText() + " \n" + coutTotal+"€");
+    	coutMarchandise.setText("Cout total de la marchandise" + " \n" + coutTotal+"€");
     	
     	try {
-			PreparedStatement ps = cnx.prepareStatement("select coutStockageArticle from article");
+			PreparedStatement ps = cnx.prepareStatement("select coutStockageArticle from tablearticle");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				coutStockage.add(Integer.parseInt(rs.getString("coutStockageArticle")));
+				coutStockage.add(Double.parseDouble(rs.getString("coutStockageArticle")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -137,20 +137,20 @@ public class Accueil implements Initializable{
     	for(int i = 0; i < coutStockage.size(); i++) {
     		coutTotal += coutStockage.get(i);
     	}
-    	CoutStockage.setText(CoutStockage.getText() + " " + coutTotal +"€/j");
+    	CoutStockage.setText("Cout stockage de la marchandise" + " \n " + coutTotal +"€/j");
     }
 
 	public static ObservableList<articleStock> getDataArticle(){
 		ObservableList<articleStock> list = FXCollections.observableArrayList();
 		ObservableList<String> references = FXCollections.observableArrayList();
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from article");
+			PreparedStatement ps = cnx.prepareStatement("select * from tablearticle");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				if(!references.contains(rs.getString("referenceArticle"))) {
-					list.add(new articleStock(Integer.parseInt(rs.getString("IdArticle")), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),Integer.parseInt(rs.getString("prixUnitaireArticle")), Integer.parseInt(rs.getString("prixCartonArticle")), Integer.parseInt(rs.getString("prixFournisseurArticle")), 
-							Integer.parseInt(rs.getString("coutStockageArticle")), Integer.parseInt(rs.getString("tvaArticle")), rs.getString("domaineArticle"),rs.getString("descriptionArticle"),0));
+					list.add(new articleStock(rs.getString("IdArticle"), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),rs.getString("prixUnitaireArticle"), rs.getString("prixCartonArticle"),rs.getString("prixFournisseurArticle"), 
+							rs.getString("coutStockageArticle"), rs.getString("tvaArticle"), rs.getString("domaineArticle"),rs.getString("descriptionArticle"),"0"));
 				}
 				references.add(rs.getString("referenceArticle"));
 			}
@@ -207,12 +207,12 @@ public class Accueil implements Initializable{
 		tableArticlesAnnee.setCellValueFactory(new PropertyValueFactory<articleStock,String>("annee"));
 		tableArticlesFamille.setCellValueFactory(new PropertyValueFactory<articleStock,String>("famille"));
 		tableArticlesDomaine.setCellValueFactory(new PropertyValueFactory<articleStock,String>("domaine"));
-		stockArticle.setCellValueFactory(new PropertyValueFactory<articleStock, Integer>("stock"));
-		tableArticlesPrixUnitaire.setCellValueFactory(new PropertyValueFactory<articleStock,Integer>("prixUnitaire"));
-		tableArticlesPrixCarton.setCellValueFactory(new PropertyValueFactory<articleStock,Integer>("prixCarton"));
-		tableArticlesFournisseur.setCellValueFactory(new PropertyValueFactory<articleStock,Integer>("prixFournisseur"));
-		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<articleStock,Integer>("tva"));
-		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<articleStock,Integer>("coutStockage"));
+		stockArticle.setCellValueFactory(new PropertyValueFactory<articleStock, String>("stock"));
+		tableArticlesPrixUnitaire.setCellValueFactory(new PropertyValueFactory<articleStock,String>("prixUnitaire"));
+		tableArticlesPrixCarton.setCellValueFactory(new PropertyValueFactory<articleStock,String>("prixCarton"));
+		tableArticlesFournisseur.setCellValueFactory(new PropertyValueFactory<articleStock,String>("prixFournisseur"));
+		tableArticlesTVA.setCellValueFactory(new PropertyValueFactory<articleStock,String>("tva"));
+		tableArticlesCoutStockage.setCellValueFactory(new PropertyValueFactory<articleStock,String>("coutStockage"));
 		
 		tableArticles.setItems(getDataArticle());
 		

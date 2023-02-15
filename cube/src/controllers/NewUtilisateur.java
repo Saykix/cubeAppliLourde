@@ -21,8 +21,8 @@ public class NewUtilisateur implements Initializable {
 	public ResultSet result;
 	
 	 public void setData(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur,
-				String motDePasseUtilisateur, String adresseUtilisateur, String villeUtilisateur, int idUtilisateur,
-				int codePostaleUtilisateur, int telephoneUtilisateur, int administrateur) {	 
+				String motDePasseUtilisateur, String adresseUtilisateur, String villeUtilisateur, String idUtilisateur,
+				String codePostaleUtilisateur, String telephoneUtilisateur, String administrateur) {	 
 		 			this.nom = nomUtilisateur;
 		 			this.prenom = prenomUtilisateur;
 		 			this.email = emailUtilisateur;
@@ -30,8 +30,8 @@ public class NewUtilisateur implements Initializable {
 		 			this.adresse = adresseUtilisateur;
 		 			this.ville = villeUtilisateur;
 		 			this.id = idUtilisateur;
-		 			this.codePostale = Integer.toString(codePostaleUtilisateur);
-		 			this.telephone = Integer.toString(telephoneUtilisateur);
+		 			this.codePostale = codePostaleUtilisateur;
+		 			this.telephone = telephoneUtilisateur;
 		 			this.administrateur = administrateur;
 		 			
 		 			
@@ -47,9 +47,7 @@ public class NewUtilisateur implements Initializable {
 		 			
 	 }
 	 
-	 String nom,prenom,email,motDePasse,adresse,ville,codePostale,telephone;
-		int id,administrateur;
-	
+	 String nom,prenom,email,motDePasse,adresse,ville,codePostale,telephone,id,administrateur;
 	
 	
     @FXML
@@ -85,10 +83,9 @@ public class NewUtilisateur implements Initializable {
     @FXML
     void ModifierUtilisateur(MouseEvent event) {
     	if (nom == null) {
-	    	String requete = "INSERT INTO `utilisateur` ( `nomUtilisateur`, `prenomUtilisateur`, `emailUtilisateur`, `motDePasseUtilisateur`, `adresseUtilisateur`, `codePostaleUtilisateur`, "
+	    	String requete = "INSERT INTO `tableutilisateur` ( `nomUtilisateur`, `prenomUtilisateur`, `emailUtilisateur`, `motDePasseUtilisateur`, `adresseUtilisateur`, `codePostaleUtilisateur`, "
 	    			+ "`villeUtilisateur`, `telephoneUtilisateur`, `administrateur`) VALUES ('"+nomUtilisateur.getText()+
 	    			"', '"+prenomUtilisateur.getText()+"', '"+emailUtilisateur.getText()+"', '"+mdpUtilisateur.getText()+"' , '"+adresseUtilisateur.getText()+"', '"+codePostaleUtilisateur.getText()+"',  '"+villeUtilisateur.getText()+"', '"+telephoneUtilisateur.getText()+"', '0');";
-	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
 				 ps.executeUpdate();
@@ -98,8 +95,8 @@ public class NewUtilisateur implements Initializable {
 			}
     	}
     	else {
-    		String requete = "UPDATE `utilisateur` SET `nomUtilisateur` = '"+nomUtilisateur.getText()+"', `prenomUtilisateur` = '"+prenomUtilisateur.getText()+"',"
-    				+ " `emailUtilisateur` = '"+emailUtilisateur.getText()+"', `motDePasseUtilisateur` = '"+mdpUtilisateur.getText()+"', `adresseUtilisateur` = '"+adresseUtilisateur.getText()+"', `villeUtilisateur` = '"+villeUtilisateur.getText()+"' WHERE `utilisateur`.`IdUtilisateur` = "+id+"";
+    		String requete = "UPDATE `tableutilisateur` SET `nomUtilisateur` = '"+nomUtilisateur.getText()+"', `prenomUtilisateur` = '"+prenomUtilisateur.getText()+"',"
+    				+ " `emailUtilisateur` = '"+emailUtilisateur.getText()+"', `motDePasseUtilisateur` = '"+mdpUtilisateur.getText()+"', `adresseUtilisateur` = '"+adresseUtilisateur.getText()+"', `villeUtilisateur` = '"+villeUtilisateur.getText()+"' WHERE `tableutilisateur`.`IdUtilisateur` = "+id+"";
 	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);

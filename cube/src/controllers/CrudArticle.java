@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -29,13 +30,12 @@ public class CrudArticle implements Initializable {
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
-	int id;
+	String id;
 	ObservableList<article> list = FXCollections.observableArrayList();
-     public void setData(int id, String nom, String reference, String annee, String famille, int prixUnitaire, int prixCarton, int prixFournisseur, int coutStockage, int tva,
+     public void setData(String id, String nom, String reference, String annee, String famille, String prixUnitaire, String prixCarton, String prixFournisseur, String coutStockage, String tva,
  			String domaine, String description) {
     	 this.id=id;
         list.add(new article(id, nom, reference, annee, famille, prixUnitaire, prixCarton, prixFournisseur, coutStockage, tva, domaine, description));
-        System.out.println("Id : " + id + "  Nom : " + nom + "  Référence : " + reference);
 
     }
     @FXML
@@ -50,10 +50,35 @@ public class CrudArticle implements Initializable {
     @FXML
     private Button delvin;
     
+    @FXML
+    private TextField nbArticle;
 
     @FXML
     void CommandVin(MouseEvent event) {
-    	
+    	String idFournisseur;
+    	try { 
+    		PreparedStatement ps = cnx.prepareStatement("SELECT IdFournisseurCE FROM `tablearticle` WHERE referenceArticle = '"+list.get(0).getReference()+"';");
+    		ResultSet rs = ps.executeQuery();
+    		if(rs.next() != false ) {
+    			idFournisseur = rs.getString("IdFournisseurCE");
+    			String requete = "INSERT INTO `tablearticle` (`nomArticle`, `anneeArticle`, `prixUnitaireArticle`, `prixCartonArticle`, `prixFournisseurArticle`, `referenceArticle`,"
+    					+ " `tvaArticle`, `domaineArticle`, `descriptionArticle`, `familleArticle`, `coutStockageArticle`, `IdFournisseurCE`)"
+    					+ " VALUES ('"+list.get(0).getNom()+"', '"+list.get(0).getAnnee()+"', '"+list.get(0).getPrixUnitaire()+"', '"+list.get(0).getPrixCarton()+"', '"+list.get(0).getPrixFournisseur()+"', '"+list.get(0).getReference()+"', "
+    					+ "'"+list.get(0).getTva()+"', '"+list.get(0).getDomaine()+"', '"+list.get(0).getDescription()+"', '"+list.get(0).getFamille()+"', '"+list.get(0).getCoutStockage()+"', '"+idFournisseur+"');";
+    		 	for(int i = 0; i < Integer.parseInt(nbArticle.getText()) ; i++) {    	    		
+    		 		try {
+    		 			PreparedStatement psb = cnx.prepareStatement(requete);
+    		 			psb.executeUpdate();
+    		 			
+    		 		} catch (SQLException e) {
+    		 			e.printStackTrace();
+    		 		}
+    	    	}
+    		}
+    	}
+    	catch(SQLException e){
+    		e.printStackTrace();
+    	}
     }
 
     @FXML
@@ -91,7 +116,7 @@ public class CrudArticle implements Initializable {
     @FXML
     void delvin(MouseEvent event) {
 		try {
-			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `article` WHERE `article`.`IdArticle` = " + id + ";");
+			PreparedStatement ps = cnx.prepareStatement("DELETE FROM `tablearticle` WHERE `tablearticle`.`IdArticle` = " + id + ";");
 			 ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
