@@ -1,13 +1,12 @@
 package Class;
 
 public class fournisseur {
-	String nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, descriptionFournisseur;
-	int idFournisseur, telephoneFournisseur, codePostalFournisseur;
+	String nomFournisseur, emailFournisseur, siretFournisseur, adresseFournisseur, coordonneesBancaireFournisseur, villeFournisseur, descriptionFournisseur, idFournisseur, telephoneUtilisateur, codePostaleUtilisateur;
 	
 	
 	public fournisseur(String nomFournisseur, String emailFournisseur, String siretFournisseur,
 			String adresseFournisseur, String coordonneesBancaireFournisseur, String villeFournisseur,
-			String descriptionFournisseur, int idFournisseur, int telephoneFournisseur, int codePostalFournisseur) {
+			String descriptionFournisseur, String idFournisseur, String telephoneUtilisateur, String codePostaleUtilisateur) {
 		super();
 		this.nomFournisseur = nomFournisseur;
 		this.emailFournisseur = emailFournisseur;
@@ -17,8 +16,8 @@ public class fournisseur {
 		this.villeFournisseur = villeFournisseur;
 		this.descriptionFournisseur = descriptionFournisseur;
 		this.idFournisseur = idFournisseur;
-		this.telephoneFournisseur = telephoneFournisseur;
-		this.codePostalFournisseur = codePostalFournisseur;
+		this.telephoneUtilisateur = telephoneUtilisateur;
+		this.codePostaleUtilisateur = codePostaleUtilisateur;
 	}
 	
 	public String getNomFournisseur() {
@@ -63,23 +62,23 @@ public class fournisseur {
 	public void setDescriptionFournisseur(String descriptionFournisseur) {
 		this.descriptionFournisseur = descriptionFournisseur;
 	}
-	public int getIdFournisseur() {
+	public String getIdFournisseur() {
 		return idFournisseur;
 	}
-	public void setIdFournisseur(int idFournisseur) {
+	public void setIdFournisseur(String idFournisseur) {
 		this.idFournisseur = idFournisseur;
 	}
-	public int getTelephoneFournisseur() {
-		return telephoneFournisseur;
+	public String getTelephoneUtilisateur() {
+		return telephoneUtilisateur;
 	}
-	public void setTelephoneFournisseur(int telephoneFournisseur) {
-		this.telephoneFournisseur = telephoneFournisseur;
+	public void setTelephoneUtilisateur(String telephoneUtilisateur) {
+		this.telephoneUtilisateur = telephoneUtilisateur;
 	}
-	public int getCodePostalFournisseur() {
-		return codePostalFournisseur;
+	public String getCodePostaleUtilisateur() {
+		return codePostaleUtilisateur;
 	}
-	public void setCodePostalFournisseur(int codePostalFournisseur) {
-		this.codePostalFournisseur = codePostalFournisseur;
+	public void setCodePostaleUtilisateur(String codePostaleUtilisateur) {
+		this.codePostaleUtilisateur = codePostaleUtilisateur;
 	}
 	
 }

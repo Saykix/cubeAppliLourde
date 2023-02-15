@@ -8,7 +8,7 @@ public class ConnexionBdd {
 	public static Connection connexionDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cube1", "root", "");
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cubeSQL", "root", "");
 			System.out.println("connected");
 			return cn;
 		} catch (ClassNotFoundException | SQLException e) {

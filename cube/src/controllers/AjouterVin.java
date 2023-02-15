@@ -66,11 +66,10 @@ public class AjouterVin implements Initializable {
 
     @FXML
     void ajoutervin(MouseEvent event) {
-    	String requete = "INSERT INTO `article` (`nomArticle`, `anneeArticle`, `prixUnitaireArticle`, `prixCartonArticle`, `prixFournisseurArticle`, `referenceArticle`,"
+    	String requete = "INSERT INTO `tablearticle` (`nomArticle`, `anneeArticle`, `prixUnitaireArticle`, `prixCartonArticle`, `prixFournisseurArticle`, `referenceArticle`,"
     			+ " `tvaArticle`, `domaineArticle`, `descriptionArticle`, `familleArticle`, `coutStockageArticle`, `IdFournisseurCE`)"
     			+ " VALUES ('"+nomArticle.getText()+"', '"+anneeArticle.getText()+"', '"+prixUnitaireArticle.getText()+"', '"+prixCartonArticle.getText()+"', '"+prixFournisseurArticle.getText()+"', '"+referenceArticle.getText()+"', "
     					+ "'"+tvaArticle.getText()+"', '"+domaineArticle.getText()+"', '"+descriptionArticle.getText()+"', '"+familleArticle.getText()+"', '"+coutStockageArticle.getText()+"', '"+idFournisseurArticle.getText()+"');";
-    	System.out.println(requete);
     	try {
 			PreparedStatement ps = cnx.prepareStatement(requete);
 			 ps.executeUpdate();

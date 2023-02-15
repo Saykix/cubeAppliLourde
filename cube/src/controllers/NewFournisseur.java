@@ -20,8 +20,8 @@ public class NewFournisseur implements Initializable {
 	public PreparedStatement st;
 	public ResultSet result;
 	
-	 public void setData(int idFournisseur, String nomFournisseur, String siretFournisseur, String emailFournisseur, String coordonneesBancaireFournisseur, 
-			String adresseFournisseur, String villeFournisseur , String descriptionFournisseur,int codePostalFournisseur, int telephoneFournisseur) {
+	 public void setData(String idFournisseur, String nomFournisseur, String siretFournisseur, String emailFournisseur, String coordonneesBancaireFournisseur, 
+			String adresseFournisseur, String villeFournisseur , String descriptionFournisseur,String codePostalFournisseur, String telephoneFournisseur) {
 			this.nom = nomFournisseur;
 			this.email = emailFournisseur;
 			this.siret = siretFournisseur;
@@ -30,8 +30,8 @@ public class NewFournisseur implements Initializable {
 			this.ville = villeFournisseur;
 			this.description = descriptionFournisseur;
 			this.id = idFournisseur;
-			this.telephone = Integer.toString(telephoneFournisseur);
-			this.codePostal = Integer.toString(codePostalFournisseur);
+			this.telephone = telephoneFournisseur;
+			this.codePostal = codePostalFournisseur;
 			
 			this.nomFournisseur.setText(nom);
 			this.emailFournisseur.setText(email);
@@ -45,9 +45,7 @@ public class NewFournisseur implements Initializable {
 			Ajouter.setText("Modifier");
 	 }
 	 
-		String nom, email, siret, adresse, coordonneesBancaire, ville, description, telephone, codePostal;
-		int id;
-	
+		String nom, email, siret, adresse, coordonneesBancaire, ville, description, telephone, codePostal,id;
 	
 
 	    @FXML
@@ -86,12 +84,11 @@ public class NewFournisseur implements Initializable {
     @FXML
     void AjouterFournisseur(MouseEvent event) {
     	if (nom == null) {
-	    	String requete = "INSERT INTO `fournisseur` (`nomFournisseur`, `emailFournisseur`, `telephoneFournisseur`, `siretFournisseur`,"
-	    			+ " `coordonneesBancaireFournisseur`, `adresseFournisseur`, `codePostalFournisseur`, `villeFournisseur`, `descriptionFournisseur`) VALUES"
+	    	String requete = "INSERT INTO `tablefournisseur` (`nomFournisseur`, `emailFournisseur`, `telephoneUtilisateur`, `siretFournisseur`,"
+	    			+ " `coordonneesBancarieFournisseur`, `adresseFournisseur`, `codePostaleUtilisateur`, `villeFournisseur`, `descriptionFournisseur`) VALUES"
 	    			+ " ('"+nomFournisseur.getText()+"', '"+emailFournisseur.getText()+"', '"+telephoneFournisseur.getText()+"', '"+siretFournisseur.getText()+"', '"
 	    			+coordonneesBancaireFournisseur.getText()+"', '"+adresseFournisseur.getText()+"', '"+codePostaleFournisseur.getText()+"', '"+villeFournisseur.getText()+"', '"
 	    			+descriptionFournisseur.getText()+"');";
-	    	System.out.println(requete);
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
 				 ps.executeUpdate();
@@ -101,11 +98,10 @@ public class NewFournisseur implements Initializable {
 			}
     	}
     	else {
-    		String requete = "UPDATE `fournisseur` SET `nomFournisseur` = '"+nomFournisseur.getText()+"', `emailFournisseur` = '"+emailFournisseur.getText()+"',"
-    				+ " `telephoneFournisseur` = '"+telephoneFournisseur.getText()+"', `siretFournisseur` = '"+siretFournisseur.getText()+"',"
-    				+ " `coordonneesBancaireFournisseur` = '"+coordonneesBancaireFournisseur.getText()+"', `adresseFournisseur` = '"+adresseFournisseur.getText()+"', `codePostalFournisseur` = '"+codePostaleFournisseur.getText()+"',"
-    				+ " `villeFournisseur` = '"+villeFournisseur.getText()+"', `descriptionFournisseur` = '"+descriptionFournisseur.getText()+"' WHERE `fournisseur`.`IdFournisseur` = "+id+";";
-	    	System.out.println(requete);
+    		String requete = "UPDATE `tablefournisseur` SET `nomFournisseur` = '"+nomFournisseur.getText()+"', `emailFournisseur` = '"+emailFournisseur.getText()+"',"
+    				+ " `telephoneUtilisateur` = '"+telephoneFournisseur.getText()+"', `siretFournisseur` = '"+siretFournisseur.getText()+"',"
+    				+ " `coordonneesBancarieFournisseur` = '"+coordonneesBancaireFournisseur.getText()+"', `adresseFournisseur` = '"+adresseFournisseur.getText()+"', `codePostaleUtilisateur` = '"+codePostaleFournisseur.getText()+"',"
+    				+ " `villeFournisseur` = '"+villeFournisseur.getText()+"', `descriptionFournisseur` = '"+descriptionFournisseur.getText()+"' WHERE `tablefournisseur`.`IdFournisseur` = "+id+";";
 	    	try {
 				PreparedStatement ps = cnx.prepareStatement(requete);
 				 ps.executeUpdate();

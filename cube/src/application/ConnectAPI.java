@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import Class.utilisateur;
 
 public class ConnectAPI {
 	public static Object sendGetRequest() {
@@ -53,28 +58,27 @@ public class ConnectAPI {
 		URL url;
 //		String string = "{\"name\": \"Sam Smith\", \"technology\": \"Python\"}";  
 //		JSONObject json = new JSONObject(string);    
-		String post_data ="{\"prenom\": \"b\", \"nom\":\"b\",\"email\": \"b\",  \"mot_de_passe\": \"b\", \"adresse\": \"b\", \"code_postal\": \"b\", \"ville\": \"b\", \"numero_de_telephone\" : \"b\", \"admin\": \"true\"}";
+		String post_data ="{'prenom': 'b', 'nom':'b','email': 'b',  'mot_de_passe': 'b', 'adresse': 'b', 'code_postal': 'b', 'ville': 'b', 'numero_de_telephone' : 'b', 'admin': 'true'}";
 		JSONObject json = new JSONObject(post_data); 
-		String toto = "key1=value1&key2=value2";
+//		utilisateur toto = new utilisateur("b", "b", "b", "b", "b", "b", "b", "b", "b", true);
+
+		post_data.toString();
 		try {
-			url = new URL("https://postman-echo.com/post");
+			url = new URL("https://localhost:7257/api/Utilisateur");
 			try {
 				HttpURLConnection con = (HttpURLConnection)url.openConnection();
 				con.setRequestMethod("POST");
-				con.addRequestProperty("Accept", "*/*");
-				con.addRequestProperty("Content-Type", "application/json");
+				con.setRequestProperty("Content-Type", "application/json");
 				con.setDoOutput(true);
-				OutputStream output = con.getOutputStream();
-//				try(OutputStream os = con.getOutputStream()) {
-//				    byte[] input = post_data.getBytes("utf-8");
-//				    os.write(input, 0, input.length);	
-//					os.flush();
-//					os.close();
-//				}
-				output.write(json.toString().getBytes());
-				output.flush();
-				output.close();
-				
+//				OutputStream output = con.getOutputStream();
+//				OutputStreamWriter writer = new OutputStreamWriter(output);
+				try(OutputStream os = con.getOutputStream()) {
+				    byte[] input = post_data.toString().getBytes("utf-8");
+				    os.write(input, 0, input.length);	
+				}
+//				writer.write(post_data);
+//				writer.flush();
+//				writer.close();
 				System.out.println("status : " + con.getResponseCode());
 				String line = "";
 				InputStreamReader input = new InputStreamReader(con.getInputStream());

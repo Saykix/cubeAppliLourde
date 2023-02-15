@@ -37,14 +37,14 @@ public class Articles implements Initializable{
 	static Connection cnx;
 	public PreparedStatement st;
 	public ResultSet result;
-		
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cnx = ConnexionBdd.connexionDB();
 		createTableau("None");
 		
 	}
-	
+
 	public void createTableau(String famille) {
 		tableArticlesNom.setCellValueFactory(new PropertyValueFactory<article,String>("nom"));
 		tableArticlesReference.setCellValueFactory(new PropertyValueFactory<article,String>("reference"));
@@ -104,21 +104,20 @@ public class Articles implements Initializable{
 		try {
 			PreparedStatement ps;
 			if(famille.equals("None")) {	
-				ps = cnx.prepareStatement("select * from article");	
+				ps = cnx.prepareStatement("select * from tablearticle");	
 			}
 			else {				
-				ps = cnx.prepareStatement("select * from article where familleArticle = '" + famille + "';");		
+				ps = cnx.prepareStatement("select * from tablearticle where familleArticle = '" + famille + "';");		
 			}
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-
-				list.add(new article(Integer.parseInt(rs.getString("IdArticle")), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),Integer.parseInt(rs.getString("prixUnitaireArticle")), Integer.parseInt(rs.getString("prixCartonArticle")), Integer.parseInt(rs.getString("prixFournisseurArticle")), Integer.parseInt(rs.getString("coutStockageArticle")), Integer.parseInt(rs.getString("tvaArticle")), rs.getString("domaineArticle"),rs.getString("descriptionArticle")));
+				System.out.println(rs.getString("IdArticle"));
+				list.add(new article(rs.getString("IdArticle"), rs.getString("nomArticle"), rs.getString("referenceArticle"), rs.getString("anneeArticle"), rs.getString("familleArticle"),rs.getString("prixUnitaireArticle"), rs.getString("prixCartonArticle"), rs.getString("prixFournisseurArticle"), rs.getString("coutStockageArticle"), rs.getString("tvaArticle"), rs.getString("domaineArticle"),rs.getString("descriptionArticle")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(list);
 		return list;
 		
 	}
