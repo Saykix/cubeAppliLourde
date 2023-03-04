@@ -4,23 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.http.HttpClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Class.utilisateur;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+
+import Class.Site;
 
 public class ConnectAPI {
 	public static Object sendGetRequest() {
 		URL url;
 		try {
-			url = new URL("https://localhost:7257/api/Article");
+			url = new URL("http://localhost:5187/api/Site");
 			try {
 				HttpURLConnection con = (HttpURLConnection)url.openConnection();
 				con.setRequestMethod("GET");
@@ -57,26 +60,29 @@ public class ConnectAPI {
 	public static Object sendPostRequest() {
 		URL url;
 //		String string = "{\"name\": \"Sam Smith\", \"technology\": \"Python\"}";  
-//		JSONObject json = new JSONObject(string);    
+//		JSONObject json = new JSONObject(string);   
+
+		Site lol = new Site("brest","toto","29200");
+
 		String post_data ="{'prenom': 'b', 'nom':'b','email': 'b',  'mot_de_passe': 'b', 'adresse': 'b', 'code_postal': 'b', 'ville': 'b', 'numero_de_telephone' : 'b', 'admin': 'true'}";
-		JSONObject json = new JSONObject(post_data); 
+		JSONObject json = new JSONObject(lol); 
 //		utilisateur toto = new utilisateur("b", "b", "b", "b", "b", "b", "b", "b", "b", true);
 
-		post_data.toString();
+//		post_data.toString();
 		try {
-			url = new URL("https://localhost:7257/api/Utilisateur");
+			url = new URL("http://localhost:5187/api/Site");
 			try {
 				HttpURLConnection con = (HttpURLConnection)url.openConnection();
 				con.setRequestMethod("POST");
 				con.setRequestProperty("Content-Type", "application/json");
 				con.setDoOutput(true);
-//				OutputStream output = con.getOutputStream();
+				OutputStream output = con.getOutputStream();
 //				OutputStreamWriter writer = new OutputStreamWriter(output);
-				try(OutputStream os = con.getOutputStream()) {
-				    byte[] input = post_data.toString().getBytes("utf-8");
-				    os.write(input, 0, input.length);	
-				}
-//				writer.write(post_data);
+//				try(OutputStream os = con.getOutputStream()) {
+//				    byte[] input = json;
+//				    os.write(input, 0, input.length);	
+//				}
+//				writer.write(json.getString());
 //				writer.flush();
 //				writer.close();
 				System.out.println("status : " + con.getResponseCode());
@@ -103,6 +109,45 @@ public class ConnectAPI {
 				return null;
 		}
 	}
+	
+	public static void toto() throws IOException{
+		Site lol = new Site("brest","toto","29200");
+        AddClientJson(lol);
+        System.out.println(AddClientJson(lol));
+        // Envoi de l'objet dans l'api
+        URL url = new URL("http://localhost:5187/api/Site");
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setDoOutput(true);
+        System.out.println(conn);
+
+        String jsonInputString = AddClientJson(lol);
+
+        // Sortie permettant d'écrire pour le post
+        try(OutputStream os = conn.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+        // Entrée permettant de récupérer la réponse du serveur
+        try(BufferedReader br = new BufferedReader(
+            new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            System.out.println(response.toString());
+        }
+	}
+	
+    public static String AddClientJson(Site u) throws JsonProcessingException {
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter.serializeAllExcept("id");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("CreateClient", theFilter);
+        ObjectMapper om = new ObjectMapper();
+        return om.writer(filters).writeValueAsString(u);
+    }
 	public static Object parseJsonResponse() {
 		URL url;
 		try {
